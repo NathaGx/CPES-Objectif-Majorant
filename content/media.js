@@ -14,15 +14,10 @@ window.courseMedia={
  remove(id){this.save(this.load().filter(x=>x.id!==id))},
  forFolder(subject,folder){return this.load().filter(x=>x.subject===subject&&x.folder===folder)}
 };
-window.openCourseImage=function(src,title){
- const w=window.open('','_blank');
- if(!w)return alert("Autorise l’ouverture d’un nouvel onglet pour afficher l’image.");
- w.document.open();
- w.document.write('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+'</title><style>html,body{margin:0;min-height:100%;background:#111;color:#fff;font-family:system-ui}body{display:flex;flex-direction:column}.bar{position:sticky;top:0;z-index:2;padding:10px 14px;background:#111;border-bottom:1px solid #333;font-size:14px}.stage{overflow:auto;flex:1;padding:24px;text-align:center}.stage img{width:auto;height:auto;max-width:none;min-width:100%;cursor:zoom-in;user-select:none;-webkit-user-drag:none}</style></head><body><div class="bar">'+esc(title)+' — utilise le zoom du navigateur (⌘+/⌘− ou Ctrl+/Ctrl−)</div><div class="stage"><img src="'+src+'" draggable="false" alt="'+esc(title)+'"></div></body></html>');
- w.document.close();
-};
 window.renderCourseImage=function(title,src,removableId){
- return '<div class="item course-image"><span class="tag">Image du cours</span><h3>'+esc(title)+'</h3><button type="button" onclick="openCourseImage(this.querySelector(\'img\').src,\''+esc(title).replace(/'/g,"\\'")+'\')" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in" title="Ouvrir et zoomer"><img src="'+src+'" draggable="false" alt="'+esc(title)+'" style="display:block;max-width:100%;height:auto;margin:14px auto;border-radius:10px;border:1px solid var(--line);pointer-events:none"></button><p class="muted">Cliquer sur l’image pour l’ouvrir seule et zoomer.</p>'+(removableId?'<button class="btn small" onclick="removeCourseImage('+removableId+')">Supprimer cette image</button>':'')+'</div>';
+ const safeTitle=esc(title);
+ const href=String(src).replace(/"/g,'&quot;');
+ return '<div class="item course-image"><span class="tag">Image du cours</span><h3>'+safeTitle+'</h3><a href="'+href+'" target="_blank" rel="noopener" style="display:block;width:100%;cursor:zoom-in;text-decoration:none" title="Ouvrir l’image seule"><img src="'+href+'" draggable="false" alt="'+safeTitle+'" style="display:block;max-width:100%;height:auto;margin:14px auto;border-radius:10px;border:1px solid var(--line);pointer-events:none"></a><p class="muted">Cliquer sur l’image pour l’ouvrir seule. Tu peux ensuite zoomer librement avec le navigateur.</p>'+(removableId?'<button class="btn small" onclick="removeCourseImage('+removableId+')">Supprimer cette image</button>':'')+'</div>';
 };
 window.courseImageUploader=function(subject,folder){
  if(!folder)return '';
