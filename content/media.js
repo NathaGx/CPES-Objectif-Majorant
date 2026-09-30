@@ -15,9 +15,13 @@ window.courseMedia={
  forFolder(subject,folder){return this.load().filter(x=>x.subject===subject&&x.folder===folder)}
 };
 window.renderCourseImage=function(title,src,removableId){
- const safeTitle=esc(title);
- const href=String(src).replace(/"/g,'&quot;');
- return '<div class="item course-image"><span class="tag">Image du cours</span><h3>'+safeTitle+'</h3><a href="'+href+'" target="_blank" rel="noopener" style="display:block;width:100%;cursor:zoom-in;text-decoration:none" title="Ouvrir l’image seule"><img src="'+href+'" draggable="false" alt="'+safeTitle+'" style="display:block;max-width:100%;height:auto;margin:14px auto;border-radius:10px;border:1px solid var(--line);pointer-events:none"></a><p class="muted">Cliquer sur l’image pour l’ouvrir seule. Tu peux ensuite zoomer librement avec le navigateur.</p>'+(removableId?'<button class="btn small" onclick="removeCourseImage('+removableId+')">Supprimer cette image</button>':'')+'</div>';
+ const t=esc(title), id='zoom_'+Math.random().toString(36).slice(2);
+ setTimeout(function(){
+  const box=document.getElementById(id);if(!box)return;
+  const img=box.querySelector('img'),range=box.querySelector('input');
+  range.oninput=function(){img.style.width=this.value+'%';img.style.maxWidth='none'};
+ },0);
+ return '<div class="item course-image"><span class="tag">Image du cours</span><h3>'+t+'</h3><div id="'+id+'" style="overflow:auto;max-height:80vh;border:1px solid var(--line);border-radius:10px"><img src="'+src+'" alt="'+t+'" draggable="false" style="display:block;width:100%;height:auto;max-width:none;user-select:none"></div><div style="display:flex;align-items:center;gap:10px;margin-top:10px"><b>Zoom</b><input type="range" min="50" max="500" value="100" step="10" style="flex:1"><span>50–500 %</span></div><p class="muted">Agrandis avec le curseur puis déplace-toi dans l’image avec les barres de défilement.</p>'+(removableId?'<button class="btn small" onclick="removeCourseImage('+removableId+')">Supprimer cette image</button>':'')+'</div>';
 };
 window.courseImageUploader=function(subject,folder){
  if(!folder)return '';
