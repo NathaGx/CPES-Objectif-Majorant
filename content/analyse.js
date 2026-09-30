@@ -72,7 +72,5 @@ window.analysisFolders = [
 ['exo','Exercice 24 — Condensation de Cauchy','Pour u_n positive décroissante, poser v_n=2^n u_{2^n} et montrer que ∑u_n et ∑v_n ont même nature.'],
 ['exo','Exercice 25 — Série définie par récurrence','Soit u_1∈R et u_{n+1}=e^{-u_n}/2. Justifier l’existence de la suite puis étudier la nature de ∑u_n.']
 ]},
-{title:'Synthèse — stratégie d’étude',items:[
-['method','Arbre de décision','1) Vérifier u_n→0. 2) Si signe constant : comparaison, équivalence, série–intégrale, d’Alembert, références. 3) Si signe variable : commencer par l’absolue convergence ; sinon chercher alternance ou développement asymptotique. 4) En présence de deux séries multipliées, distinguer produit terme à terme et produit de Cauchy.']
-]}
+{title:'Synthèse — arbre de fin de chapitre',items:[['image','Arbre original — Séries numériques',window.seriesTreeImage]]}
 ];
