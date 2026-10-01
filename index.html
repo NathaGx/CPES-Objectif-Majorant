@@ -34,6 +34,8 @@
 <section id="languages" class="view"><h2>Langues & Anki</h2><div class="grid"><div class="card"><h3>Anglais</h3><p>Vocabulaire + connaissances International News.</p><button class="btn" onclick="addLang('Anglais')">Ajouter</button></div><div class="card"><h3>Espagnol</h3><p>Vocabulaire, expressions et connaissances.</p><button class="btn" onclick="addLang('Espagnol')">Ajouter</button></div></div><div id="languageList" class="sectiongap"></div></section>
 <section id="courses" class="view"><h2>Mes cours</h2><div class="card hero"><h3>Dossier CPES Sciences</h3><p>Accès centralisé à tous tes cours sur Google Drive.</p><a class="drive" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B2myd8j9ZkqSV1FQbm4tMFJGZTQ?resourcekey=0-wtd_FCqAEs9ci0ex2sGX-w">Ouvrir mes cours ↗</a></div></section>
 </main><script src="content/assets/series-tree.js?v=4"></script><script src="content/analyse.js"></script><script src="content/algebre.js"></script><script src="content/media.js?v=4"></script><script>
+// Build 2026-10-01 GEI-QCM-v2: force migration of legacy GEI entries on every load.
+
 const START='2026-10-01', DAY=86400000;
 const subjects=[['Topologie','Ouverts/fermés, distances, adhérence, norme ∞…'],['Analyse','Limites, Taylor-Young, DL, séries et critères…'],['Algèbre','Dimension, sommes directes, projecteurs, applications linéaires…'],['Probabilités','Variables aléatoires, lois, espérance et méthodes.'],['Algorithmique','Structures, complexité, preuves et programmation.'],['Physique','Ondes, électromagnétisme, mécanique quantique, chimie physique.']];
 const seedGEI={
