@@ -237,7 +237,40 @@ function findGEI(id){for(let qs of Object.values(S.gei)){let q=qs.find(x=>x.id==
 function validateGEI(id){let q=findGEI(id);if(!q||q.validated)return;let good=new Set(q.correct||[]),sel=new Set(q.selected||[]),ok=0;for(let i=0;i<5;i++)if(sel.has(i)===good.has(i))ok++;q.score=Math.round(ok*2)/10;q.validated=true;q.done=true;save();renderGEI();renderDashboard()}
 function resetGEI(id){let q=findGEI(id);if(!q)return;q.selected=[];q.validated=false;q.done=false;q.score=null;save();renderGEI();renderDashboard()}
 function geiQuestionHTML(q,i){let good=new Set(q.correct||[]),sel=new Set(q.selected||[]);let choices=(q.choices||[]).map((x,n)=>{let state=q.validated?(sel.has(n)===good.has(n)?'✓':'✗'):'';let bg=q.validated?(sel.has(n)===good.has(n)?'background:#eaf8ef;border-color:#65a879':'background:#fff0f0;border-color:#d97878'):' ';return `<label style="display:block;padding:10px 12px;margin:7px 0;border:1px solid var(--line);border-radius:9px;${bg}"><input type="checkbox" ${sel.has(n)?'checked':''} ${q.validated?'disabled':''} onchange="toggleGEI('${q.id}',${n})"> <b>${'ABCDE'[n]}.</b> ${esc(x)} ${q.validated?`<b style="float:right">${state}</b>`:''}</label>`}).join('');let corr=q.validated?`<div class="item method"><b>Score : ${q.score.toFixed(1)}/1</b><p class="tiny muted">Score d’entraînement : +0,2 par décision correcte. Ce score ne prétend pas reproduire le barème officiel d’une session.</p>${q.choices.map((x,n)=>`<p><b>${'ABCDE'[n]} — ${good.has(n)?'Vrai':'Faux'} :</b> ${esc(q.explain[n])}</p>`).join('')}<p class="tiny"><b>Source :</b> ${esc(q.source||'')}</p><button class="btn alt" onclick="resetGEI('${q.id}')">Recommencer</button></div>`:'';return `<div class="gei ${q.validated?'done':'pending'}"><strong>Question ${i+1}</strong><p>${esc(q.q)}</p>${choices}${q.legacyAnswer?`<p class="tiny muted"><b>Ancienne réponse conservée :</b> ${esc(q.legacyAnswer)}</p>`:''}${q.validated?corr:`<button class="btn" onclick="validateGEI('${q.id}')">Valider</button>`}</div>`}
-function renderGEI(){ensureGEI();let arr=Object.entries(S.gei).sort((a,b)=>b[0].localeCompare(a[0]));document.getElementById('geiList').innerHTML=arr.length?arr.map(([d,qs])=>`<div class="card sectiongap"><div class="row"><h3>${d}</h3><span class="tag">${qs[0].subject}</span></div>${qs.map(geiQuestionHTML).join('')}</div>`).join(''):'<div class="card">Les GEI commencent le 1er octobre 2026.</div>'}
+let geiArchiveFilters={subject:'',notion:'',difficulty:''};
+const geiDifficultyLabels={1:'Facile',2:'Intermédiaire',3:'Difficile'};
+function geiClassification(q){
+ if(q.notion&&q.difficulty)return {notion:q.notion,difficulty:q.difficulty};
+ const t=q.q||'';
+ if(t.includes('sin(1/n)'))return {notion:'Développements limités et séries',difficulty:3};
+ if(t.includes('vₙ = 1/n'))return {notion:'Séries alternées et sommes de séries',difficulty:2};
+ if(t.includes('zₙ ='))return {notion:'Séries complexes et divergence grossière',difficulty:2};
+ if(t.includes('F₁ ='))return {notion:'Sommes directes de plusieurs sous-espaces',difficulty:2};
+ if(t.includes('dimension 7'))return {notion:'Dimension et formule de Grassmann',difficulty:2};
+ if(t.includes('f(x,y,z,t)'))return {notion:'Applications linéaires, noyau et image',difficulty:2};
+ if(t.includes('ln(1+x)'))return {notion:'Développements limités',difficulty:1};
+ if(t.includes('n/2ⁿ'))return {notion:'Séries et critère de d’Alembert',difficulty:1};
+ if(t.includes('uₙ~vₙ'))return {notion:'Comparaison et équivalence de séries',difficulty:1};
+ if(t.includes('partie non vide'))return {notion:'Sous-espaces vectoriels',difficulty:1};
+ if(t.includes('famille (x₁'))return {notion:'Familles libres et liées',difficulty:1};
+ if(t.includes('F et G'))return {notion:'Sommes directes et dimensions',difficulty:1};
+ return {notion:q.subject==='Analyse'?'Séries numériques':'Algèbre linéaire',difficulty:2};
+}
+function setGeiArchiveFilter(key,value){geiArchiveFilters[key]=value;renderGEI();}
+function renderGEI(){
+ ensureGEI();
+ const all=Object.entries(S.gei).flatMap(([date,qs])=>qs.map(q=>({...q,date})));
+ const pending=all.filter(q=>!q.validated).sort((a,b)=>b.date.localeCompare(a.date));
+ const done=all.filter(q=>q.validated);
+ const notions=[...new Set(done.map(q=>geiClassification(q).notion))].sort((a,b)=>a.localeCompare(b,'fr'));
+ const options=(values,value)=>values.map(([id,label])=>`<option value="${esc(id)}" ${String(value)===String(id)?'selected':''}>${esc(label)}</option>`).join('');
+ const filters=`<div class="grid"><label>Matière<select onchange="setGeiArchiveFilter('subject',this.value)">${options([['','Toutes les matières'],['Algèbre','Algèbre'],['Analyse','Analyse']],geiArchiveFilters.subject)}</select></label><label>Notion<select onchange="setGeiArchiveFilter('notion',this.value)">${options([['','Toutes les notions'],...notions.map(n=>[n,n])],geiArchiveFilters.notion)}</select></label><label>Difficulté<select onchange="setGeiArchiveFilter('difficulty',this.value)">${options([['','Tous les niveaux'],[1,'Facile'],[2,'Intermédiaire'],[3,'Difficile']],geiArchiveFilters.difficulty)}</select></label></div>`;
+ const selected=done.filter(q=>{const m=geiClassification(q);return (!geiArchiveFilters.subject||q.subject===geiArchiveFilters.subject)&&(!geiArchiveFilters.notion||m.notion===geiArchiveFilters.notion)&&(!geiArchiveFilters.difficulty||String(m.difficulty)===geiArchiveFilters.difficulty);});
+ const groups={};
+ for(const q of selected){const m=geiClassification(q);const key=q.subject+' · '+m.notion;(groups[key]??=[]).push(q);}
+ const archive=Object.keys(groups).sort((a,b)=>a.localeCompare(b,'fr')).map(key=>`<div class="sectiongap"><h3>${esc(key)}</h3>${groups[key].sort((a,b)=>geiClassification(a).difficulty-geiClassification(b).difficulty||b.date.localeCompare(a.date)).map(q=>{const m=geiClassification(q);return `<details class="card sectiongap"><summary style="cursor:pointer;line-height:1.6"><span class="tag">${geiDifficultyLabels[m.difficulty]}</span> <span class="tag">${q.date}</span> ${esc(q.q)} <span class="muted">· ${Number(q.score||0).toFixed(1)}/1</span></summary>${geiQuestionHTML(q,0)}</details>`;}).join('')}</div>`).join('');
+ document.getElementById('geiList').innerHTML=`<h3 class="sectiongap">À terminer · ${pending.length}</h3>${pending.length?pending.map((q,i)=>`<div class="card sectiongap"><span class="tag">${q.date}</span><span class="tag">${esc(q.subject)}</span>${geiQuestionHTML(q,i)}</div>`).join(''):'<div class="card empty">Tous les QCM sont terminés.</div>'}<div class="card sectiongap"><h2>QCM terminés · ${done.length}</h2><p class="muted">Classement par notion, puis du plus facile au plus difficile. La difficulté estime le raisonnement demandé, indépendamment de ton score.</p>${filters}<p class="muted">${selected.length} question(s) trouvée(s)</p></div>${archive||'<div class="card empty sectiongap">Aucun QCM terminé ne correspond à ces filtres.</div>'}`;
+}
 function renderSubjects(){document.getElementById('subjectGrid').innerHTML=subjects.map(([n,d])=>{let c=S.content.filter(x=>x.subject===n).length;return `<div class="card subject" onclick="openSubject('${n}')"><h3>${n}</h3><p class="muted">${d}</p><div class="progress"><div style="width:${Math.min(100,c*10)}%"></div></div><p class="tiny">${c} élément(s)</p></div>`}).join('')}
 function openSubject(n){currentSubject=n;document.getElementById('subjectTitle').textContent=n;document.getElementById('subjectDesc').textContent=subjects.find(x=>x[0]===n)?.[1]||'';show('subject')}
 function addContent(type){let title=prompt('Titre / notion / exercice');if(!title)return;let body=prompt(type==='erreur'?'Erreur, cause et réflexe correctif :':'Contenu / méthode / correction :')||'';S.content.push({id:Date.now(),subject:currentSubject,type,title,body,created:dateISO(),stage:0,next:dateISO()});save();renderContent()}
