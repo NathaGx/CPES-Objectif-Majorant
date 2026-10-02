@@ -22,6 +22,7 @@
 .weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:16px 0 14px}.weekday{padding:11px 8px;border:1px solid var(--line,#e5e7eb);border-radius:12px;text-align:center;background:var(--card,#fff);font-size:13px}.weekday strong{display:block;font-size:14px}.weekday .daydate{opacity:.62;margin-top:3px}.weekday.selected{outline:2px solid var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.12)}
 .weekday.today{outline:2px solid #7c3aed;background:rgba(124,58,237,.08)}@media(max-width:760px){.weekdays{grid-template-columns:repeat(7,minmax(72px,1fr));overflow-x:auto}.weekday{min-width:72px}}
 .pyTools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.pyTools input{flex:1;min-width:180px;margin:0}.pyTools .btn{font-size:14px}.pyTools .btn:disabled{opacity:.5;cursor:default}.pyWorkspace{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px}.pyWorkspace .card{min-width:0}.pyEditor{display:flex;margin-top:14px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#171329;color:#eee9ff;height:420px}.pyEditor pre,.pyEditor textarea{font:16px/24px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;tab-size:4;margin:0;border:0;padding:14px 12px;border-radius:0}.pyEditor pre{color:#aaa1c3;text-align:right;background:#211a36;overflow:hidden;user-select:none;flex:0 0 52px}.pyEditor textarea{flex:1;min-width:0;resize:none;background:transparent;color:inherit;white-space:pre;outline-offset:-3px}.pyEditor textarea:focus{outline:2px solid #a78bfa}#pyOutput{height:350px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#171329;color:#eee9ff;padding:14px;border-radius:10px;font:15px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}#pyDiagnostic{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--bad);font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}#pyStatus{font-size:14px;color:var(--muted)}#pyInputs{min-height:90px}.pyWorkspace p, #python details p{font-size:14px;line-height:1.6}#python summary{cursor:pointer;font-weight:650}#pyFile[hidden]{display:none}@media(max-width:850px){.pyWorkspace{grid-template-columns:1fr}.pyEditor{height:350px}#pyOutput{height:240px}}
+.pyCommandRow{display:flex;align-items:flex-start;gap:8px;background:#171329;padding:8px 10px;border-radius:10px;color:#eee9ff}.pyCommandRow label{font:16px/24px monospace;padding-top:8px}.pyCommandRow textarea{font:16px/24px monospace;background:transparent;color:inherit;border:0;min-height:40px;height:44px;margin:0;padding:8px;resize:vertical}.pyCommandRow button{margin-top:3px}#pyOutput{height:310px}#pyCommand:focus{outline:2px solid #a78bfa}
 </style></head><body><header><h1>CPES : Objectif Majorant</h1></header><nav id="nav"></nav><main>
 <section id="dashboard" class="view active"><div class="row"><div><h2>Aujourd'hui</h2><div class="muted" id="today"></div></div><button class="btn" onclick="show('todo')">Voir ma journée</button></div><div class="grid sectiongap" id="stats"></div><div class="split sectiongap"><div class="card"><h3>À faire aujourd'hui</h3><div id="todayTasks"></div></div><div class="card"><h3>GEI / UNIV</h3><div id="todayGei"></div></div></div><div class="card sectiongap"><div class="row"><h3>Charge de révision — 14 jours</h3><span class="tiny muted">retards inclus</span></div><div class="bars" id="graph"></div></div></section>
 <section id="todo" class="view"><div class="row"><div><h2>Ma semaine</h2><p class="muted">Vue type Notion : uniquement tes tâches. Les tâches non terminées restent visibles.</p></div><button class="btn" onclick="addTask()">+ Ajouter une tâche</button></div><div class="card sectiongap"><div id="weekNav"></div><div id="weekDays" class="weekdays"></div><table class="weektable"><thead><tr><th>Matière</th><th>À faire</th><th>Faites</th><th>Progression</th></tr></thead><tbody id="weekBody"></tbody></table></div><div class="sectiongap" id="taskList"></div></section>
@@ -39,7 +40,7 @@
  <div class="pyTools"><button class="btn" id="pyRun">Exécuter · Ctrl/⌘ Entrée</button><button class="btn alt" id="pyCheck">Vérifier la syntaxe</button><button class="btn bad" id="pyStop" disabled>Arrêter</button><button class="btn alt" id="pyReset">Réinitialiser Python</button><button class="btn alt" id="pyDownload">Télécharger .py</button><label class="btn alt" for="pyFile">Ouvrir .py</label><input id="pyFile" type="file" accept=".py,text/plain" hidden></div>
  <div class="pyWorkspace">
   <div class="card"><div class="row"><label for="pyCode"><b>Programme · entrainement.py</b></label><span id="pySaved" class="muted">Sauvegarde locale</span></div><div class="pyEditor"><pre id="pyLines" aria-hidden="true">1</pre><textarea id="pyCode" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-describedby="pyHint" wrap="off"></textarea></div><p id="pyHint" class="muted">Tab : 4 espaces. Les erreurs indiquent la ligne concernée. Ton code est conservé sur ce navigateur.</p><div id="pyDiagnostic" role="status"></div></div>
-  <div class="card"><div class="row"><h3>Console</h3><button class="btn alt" id="pyClear">Effacer</button></div><pre id="pyOutput" aria-label="Sortie Python" tabindex="0"></pre><label for="pyInputs">Valeurs pour input() · une par ligne</label><textarea id="pyInputs" placeholder="Exemple :&#10;5&#10;Nathanael"></textarea><p class="muted">Les valeurs sont lues dans l’ordre à chaque exécution.</p></div>
+  <div class="card"><div class="row"><h3>Shell Python</h3><button class="btn alt" id="pyClear">Effacer</button></div><pre id="pyOutput" aria-label="Sortie Python" tabindex="0"></pre><div class="pyCommandRow"><label id="pyPrompt" for="pyCommand">&gt;&gt;&gt;</label><textarea id="pyCommand" rows="1" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Commande Python"></textarea><button class="btn" id="pySend">Entrée</button></div><p class="muted">Entrée : exécuter. ↑ / ↓ : historique. Pour un bloc, termine par une ligne vide.</p><label for="pyInputs">Valeurs pour input() · une par ligne</label><textarea id="pyInputs" placeholder="Exemple :&#10;5&#10;Nathanael"></textarea><p class="muted">Les valeurs sont lues dans l’ordre à chaque exécution.</p></div>
  </div>
  <details class="card sectiongap"><summary>Imports et bibliothèques</summary><p><code>math</code>, <code>random</code>, <code>collections</code>, <code>itertools</code>, <code>heapq</code>… s’importent normalement. Les bibliothèques compatibles, comme NumPy, sont chargées à partir de tes imports.</p><p>Python fonctionne dans le navigateur : certaines bibliothèques nécessitant le système de ton ordinateur ne sont pas disponibles. Internet est nécessaire au premier chargement et pour charger des bibliothèques.</p><label for="pyPackages">Installer un paquet compatible avec le navigateur</label><div class="pyTools"><input id="pyPackages" placeholder="Exemple : sortedcontainers" aria-label="Nom du paquet Python"><button class="btn alt" id="pyInstall">Installer</button></div><p>Tu peux aussi utiliser <code>import micropip</code> puis <code>await micropip.install("nom_du_paquet")</code>.</p></details>
 </section>
@@ -217,11 +218,13 @@ function renderDashboard(){ensureDailyTasks();ensureGEI();let due=dueTasks(),pg=
 ensureDailyTasks();renderNav();show('dashboard');
 </script><script>(() => {
  const $=id=>document.getElementById(id), code=$('pyCode');
- const initial='import math\n\ndef carre(x):\n    return x * x\n\nfor i in range(5):\n    print(i, carre(i))\n\nprint("Racine de 2 :", math.sqrt(2))\n';
- try { code.value=localStorage.getItem('cpesPythonCode') ?? initial; } catch {code.value=initial;}
+ const oldExample='import math\n\ndef carre(x):\n    return x * x\n\nfor i in range(5):\n    print(i, carre(i))\n\nprint("Racine de 2 :", math.sqrt(2))\n';
+ const initial='';
+ try {const saved=localStorage.getItem('cpesPythonCode');code.value=(!saved||saved===oldExample)?'':saved;} catch {code.value='';}
+ let history=[],historyIndex=0,more=false;
  let worker=null, ready=false, busy=false, loading=false, revision=0, timer, job=0;
  const workerSource=String.raw`
- let py, scope;
+ let py, scope, repl;
  const send=(type,data={})=>postMessage({type,...data});
  const boot=(async()=>{
   importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js');
@@ -231,6 +234,9 @@ ensureDailyTasks();renderNav();show('dashboard');
   py.setStderr({write:b=>{send('output',{text:decoder.decode(b)});return b.length;}});
   scope=py.runPython('dict(__name__="__main__")');
   py.runPython('import json as _ide_json, traceback as _ide_tb, ast as _ide_ast\ndef _ide_check(source):\n    try:\n        compile(source, "entrainement.py", "exec", flags=_ide_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)\n        return _ide_json.dumps({"ok": True})\n    except SyntaxError as e:\n        return _ide_json.dumps({"ok": False, "line": e.lineno, "column": e.offset, "kind": type(e).__name__, "message": str(e.msg), "text": e.text})\ndef _ide_run(source, namespace):\n    try:\n        exec(compile(source, "entrainement.py", "exec"), namespace)\n        return _ide_json.dumps({"ok": True})\n    except BaseException as e:\n        frames = _ide_tb.extract_tb(e.__traceback__)\n        lines = [f.lineno for f in frames if f.filename == "entrainement.py"]\n        return _ide_json.dumps({"ok": False, "line": lines[-1] if lines else None, "kind": type(e).__name__, "message": str(e), "traceback": "".join(_ide_tb.format_exception(type(e), e, e.__traceback__))})');
+  py.runPython('import code as _ide_code, codeop as _ide_codeop, sys as _ide_sys\nclass _ide_Console(_ide_code.InteractiveConsole):\n    def showtraceback(self):\n        self.write("".join(_ide_tb.format_exception(*_ide_sys.exc_info())))\n    def showsyntaxerror(self, filename=None):\n        self.write("".join(_ide_tb.format_exception_only(*_ide_sys.exc_info()[:2])))\n    def write(self, text):\n        self.failed = True\n        _ide_sys.stderr.write(text)\ndef _ide_probe(console, line):\n    source = "\\n".join(console.buffer + [line])\n    try:\n        valid = _ide_codeop.compile_command(source, "<console>", "single") is not None\n    except (SyntaxError, OverflowError, ValueError):\n        valid = False\n    return _ide_json.dumps({"valid": valid, "source": source})');
+  const makeConsole=py.globals.get('_ide_Console');
+  try{repl=makeConsole(scope);}finally{makeConsole.destroy();}
   send('ready');
  })();
  boot.catch(e=>send('fatal',{message:String(e)}));
@@ -242,6 +248,17 @@ ensureDailyTasks();renderNav();show('dashboard');
     const pip=py.pyimport('micropip');
     try{await pip.install(m.packages);}finally{pip.destroy();}
     send('done',{id:m.id,ok:true});return;
+   }
+   if(m.action==='console'){
+    const values=(m.inputs||'').split('\n');let inputIndex=0;
+    py.setStdin({stdin:()=>inputIndex<values.length?values[inputIndex++]:null});
+    const probe=py.globals.get('_ide_probe');let info;
+    try{info=JSON.parse(probe(repl,m.code));}finally{probe.destroy();}
+    if(info.valid)await py.loadPackagesFromImports(info.source,{messageCallback:t=>send('status',{text:t}),errorCallback:t=>send('output',{text:t+'\n'})});
+    repl.__setattr__('failed',false);
+    const more=repl.push(m.code);
+    py.runPython('import sys; sys.stdout.flush(); sys.stderr.flush()');
+    send('consoleDone',{more,ok:!repl.__getattribute__('failed')});return;
    }
    const check=py.globals.get('_ide_check');
    let diagnostic;
@@ -267,7 +284,7 @@ ensureDailyTasks();renderNav();show('dashboard');
  `;
  function output(t){const p=$('pyOutput');p.textContent=(p.textContent+t).slice(-150000);p.scrollTop=p.scrollHeight;}
  function status(t){$('pyStatus').textContent=t;}
- function controls(){ $('pyRun').disabled=busy||loading;$('pyCheck').disabled=busy||loading;$('pyInstall').disabled=busy||loading;$('pyStop').disabled=!(busy||loading); }
+ function controls(){ $('pyRun').disabled=busy||loading;$('pyCheck').disabled=busy||loading;$('pyInstall').disabled=busy||loading;$('pyStop').disabled=!(busy||loading);$('pySend').disabled=busy||loading;$('pyCommand').disabled=busy||loading; }
  function diagnostic(d){$('pyDiagnostic').textContent=d.ok?'Syntaxe correcte.':`${d.kind||'Erreur'}${d.line?' · ligne '+d.line:''}${d.column?', colonne '+d.column:''} : ${d.message||''}${d.text?'\n'+d.text:''}`;}
  function start(){
   if(worker)return;
@@ -275,18 +292,19 @@ ensureDailyTasks();renderNav();show('dashboard');
   const url=URL.createObjectURL(new Blob([workerSource],{type:'text/javascript'}));
   try{worker=new Worker(url);}catch(e){loading=false;controls();status('Impossible de démarrer Python.');output(String(e)+'\n');return;}finally{URL.revokeObjectURL(url);}
   worker.onmessage=({data:d})=>{
-   if(d.type==='ready'){ready=true;loading=false;controls();status('Python prêt');check();}
+   if(d.type==='ready'){ready=true;loading=false;controls();status('Python prêt');$('pyCommand').focus();}
+   if(d.type==='consoleDone'){busy=false;more=d.more;$('pyPrompt').textContent=more?'...':'>>>';controls();status(d.ok?'Python prêt':'Erreur · tu peux saisir la commande suivante');$('pyCommand').focus();}
    if(d.type==='output')output(d.text);
    if(d.type==='status')status(d.text);
    if(d.type==='checked'&&d.revision===revision)diagnostic(d);
-   if(d.type==='done'){busy=false;controls();status(d.ok?'Exécution terminée':'Erreur');if(!d.ok){diagnostic(d);output('\n'+(d.traceback||`${d.kind||'Erreur'}${d.line?' · ligne '+d.line:''}: ${d.message}`)+'\n');}else if(d.id==='install'){output('Paquet installé.\n');}if(d.ok)check();}
+   if(d.type==='done'){busy=false;controls();status(d.ok?'Exécution terminée':'Erreur');if(!d.ok){diagnostic(d);output('\n'+(d.traceback||`${d.kind||'Erreur'}${d.line?' · ligne '+d.line:''}: ${d.message}`)+'\n');}else if(d.id==='install'){output('Paquet installé.\n');}}
    if(d.type==='fatal'){loading=false;busy=false;worker.terminate();worker=null;ready=false;controls();status('Chargement impossible : vérifier la connexion puis réessayer.');output(d.message+'\n');}
   };
   worker.onerror=e=>{output((e.message||'Erreur de chargement Python')+'\n');stop(false);status('Chargement impossible : réessayer.');};
  }
  function check(){if(ready&&!busy)worker.postMessage({action:'check',code:code.value,revision});}
- function stop(clear){if(worker)worker.terminate();worker=null;ready=false;loading=false;busy=false;controls();status('Python arrêté · redémarrage à la prochaine exécution');if(clear)$('pyOutput').textContent='';else output('\nExécution arrêtée. Les variables Python ont été réinitialisées.\n');}
- function update(){revision++;$('pyLines').textContent=Array.from({length:code.value.split('\n').length},(_,i)=>i+1).join('\n');$('pyLines').scrollTop=code.scrollTop;try{localStorage.setItem('cpesPythonCode',code.value);$('pySaved').textContent='Code sauvegardé';}catch{$('pySaved').textContent='Sauvegarde indisponible';}clearTimeout(timer);timer=setTimeout(check,650);}
+ function stop(clear){if(worker)worker.terminate();worker=null;ready=false;loading=false;busy=false;more=false;$('pyPrompt').textContent='>>>';controls();status('Python arrêté · redémarrage à la prochaine exécution');if(clear)$('pyOutput').textContent='';else output('\nExécution arrêtée. Les variables Python ont été réinitialisées.\n');}
+ function update(){revision++;$('pyLines').textContent=Array.from({length:code.value.split('\n').length},(_,i)=>i+1).join('\n');$('pyLines').scrollTop=code.scrollTop;try{localStorage.setItem('cpesPythonCode',code.value);$('pySaved').textContent='Code sauvegardé';}catch{$('pySaved').textContent='Sauvegarde indisponible';}}
  function run(){if(busy||loading)return;if(!ready){start();const current=worker;if(!current)return;const listener=({data:d})=>{if(d.type==='ready'){current.removeEventListener('message',listener);run();}};current.addEventListener('message',listener);return;}busy=true;controls();$('pyDiagnostic').textContent='';status('Exécution…');output('\n>>> entrainement.py\n');worker.postMessage({action:'run',id:++job,code:code.value,inputs:$('pyInputs').value});}
  code.addEventListener('input',update);code.addEventListener('scroll',()=>{$('pyLines').scrollTop=code.scrollTop;});
  code.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run();}if(e.key==='Tab'){e.preventDefault();const a=code.selectionStart,b=code.selectionEnd;code.setRangeText('    ',a,b,'end');update();}if(e.key==='Enter'&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const a=code.selectionStart,b=code.selectionEnd,line=code.value.slice(0,a).split('\n').pop(),indent=(line.match(/^\s*/)||[''])[0]+(line.trimEnd().endsWith(':')?'    ':'');code.setRangeText('\n'+indent,a,b,'end');update();}});
@@ -294,9 +312,26 @@ ensureDailyTasks();renderNav();show('dashboard');
  $('pyDownload').onclick=()=>{const url=URL.createObjectURL(new Blob([code.value],{type:'text/x-python'})),a=document.createElement('a');a.href=url;a.download='entrainement.py';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
  $('pyFile').onchange=async e=>{const file=e.target.files[0];if(file){if(code.value!==initial&&!confirm('Remplacer le code actuel par ce fichier ?'))return;code.value=await file.text();update();}e.target.value='';};
  $('pyInstall').onclick=()=>{const packages=$('pyPackages').value.trim().split(/\s*,\s*|\s+/).filter(Boolean);if(!packages.length)return;if(!ready){start();output('Attends le chargement de Python, puis clique à nouveau sur Installer.\n');return;}busy=true;controls();status('Installation…');worker.postMessage({action:'install',id:'install',packages});};
+ function command(){
+  if(busy||loading)return;
+  if(!ready){start();return;}
+  const text=$('pyCommand').value;
+  if(!text.trim()&&!more)return;
+  output((more?'... ':'>>> ')+text+'\n');
+  if(text.trim()){history.push(text);historyIndex=history.length;}
+  $('pyCommand').value='';busy=true;controls();status('Exécution…');
+  worker.postMessage({action:'console',id:++job,code:text,inputs:$('pyInputs').value});
+ }
+ $('pySend').onclick=command;
+ $('pyCommand').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();command();}
+  if((e.key==='ArrowUp'||e.key==='ArrowDown')&&!e.shiftKey&&!$('pyCommand').value.includes('\n')){e.preventDefault();historyIndex=Math.max(0,Math.min(history.length,historyIndex+(e.key==='ArrowUp'?-1:1)));$('pyCommand').value=history[historyIndex]||'';}
+  if(e.key==='Tab'){e.preventDefault();const t=$('pyCommand');t.setRangeText('    ',t.selectionStart,t.selectionEnd,'end');}
+ });
  const oldShow=window.show;window.show=function(id){oldShow(id);if(id==='python'){update();start();}};
  window.addEventListener('hashchange',()=>{if(location.hash==='#python')window.show('python');});
  update();controls();
  if(location.hash==='#python')window.show('python');
 })();
 </script></body></html>
+
