@@ -29,7 +29,7 @@
 <section id="calendar" class="view"><div class="row"><div><h2>Calendrier</h2><p class="muted">Clique sur un jour pour ajouter un événement.</p></div><div><button class="btn" onclick="addCalendarEvent()">+ Ajouter</button> <button class="btn alt" onclick="calMove(-1)">←</button> <button class="btn alt" onclick="calMove(1)">→</button></div></div><p class="muted" id="calTitle"></p><div class="card"><div class="calgrid" id="calendarGrid"></div></div></section>
 <section id="daily" class="view"><h2>Entraînement quotidien — Analyse & Algèbre</h2><p class="muted">Chaque jour : question de cours précise, démonstration à restituer et flash-exercice. Pour l’Algèbre, les questions sont tirées du cours complet intégré.</p><div class="dailygrid" id="dailyTraining"></div></section>
 <section id="news" class="view"><div class="row"><div><h2>News quotidiennes</h2><p class="muted">Six actualités de la veille, en anglais et en espagnol, avec vocabulaire et sources. Brief quotidien à 7 h.</p></div><button class="btn" onclick="addNews()">+ Ajouter le brief du jour</button></div><div id="newsList"></div></section>
-<section id="gei" class="view"><h2>GEI / UNIV</h2><p class="muted">File GEI / UNIV cumulative. Les exercices seront reconstruits à partir de tes cours d’Analyse et d’Algèbre dès leur ajout.</p><div id="geiList"></div></section>
+<section id="gei" class="view"><h2>GEI / UNIV</h2><p class="muted">QCM cumulatifs : une ou plusieurs réponses peuvent être justes. Leur nombre varie selon la question. Questions originales fondées sur tes cours.</p><div id="geiList"></div></section>
 <section id="subjects" class="view"><h2>Matières</h2><div class="grid" id="subjectGrid"></div></section>
 <section id="subject" class="view"><div class="row"><div><h2 id="subjectTitle"></h2><p class="muted" id="subjectDesc"></p></div><button class="btn alt" onclick="show('subjects')">← Matières</button></div><div id="contentList" class="sectiongap"></div></section>
 <section id="review" class="view"><h2>Planning de réactivation</h2><p class="muted">Répétition espacée J0 → J2 → J7 → J21 → J45 → J90. Une notion ratée peut être replacée plus tôt.</p><div id="reviewList"></div></section>
@@ -50,16 +50,150 @@
 const START='2026-10-01', DAY=86400000;
 const subjects=[['Topologie','Ouverts/fermés, distances, adhérence, norme ∞…'],['Analyse','Limites, Taylor-Young, DL, séries et critères…'],['Algèbre','Dimension, sommes directes, projecteurs, applications linéaires…'],['Probabilités','Variables aléatoires, lois, espérance et méthodes.'],['Algorithmique','Structures, complexité, preuves et programmation.'],['Physique','Ondes, électromagnétisme, mécanique quantique, chimie physique.']];
 const seedGEI={
-Analyse:[
-{q:'Au voisinage de 0, à propos de ln(1+x), quelles assertions sont vraies ?',choices:['ln(1+x)=x−x²/2+x³/3+o(x³)','ln(1+x)=x+x²/2+x³/3+o(x³)','(ln(1+x)−x+x²/2)/x³ tend vers 1/3','ln(1+x)−x est équivalent à −x²/2','ln(1+x)=x+o(x)'],correct:[0,2,3,4],explain:['Vrai : DL usuel à l’ordre 3.','Faux : le coefficient de x² vaut −1/2.','Vrai : conséquence directe du DL.','Vrai : le premier terme non nul du reste après x est −x²/2.','Vrai : ln(1+x)~x.'],source:'Adapté du cours — Séries numériques / développements asymptotiques.'},
-{q:'On considère la série Σ n/2ⁿ (n≥1). Quelles assertions sont vraies ?',choices:['Son terme général tend vers 0','Elle converge','Le critère de d’Alembert donne une limite égale à 1/2','Sa somme vaut 2','Elle diverge car n tend vers +∞'],correct:[0,1,2,3],explain:['Vrai.','Vrai : par exemple par d’Alembert.','Vrai : ((n+1)/2^(n+1))/(n/2^n)→1/2.','Vrai : Σ n x^n=x/(1−x)² pour |x|<1, avec x=1/2.','Faux : le facteur exponentiel 2ⁿ domine n.'],source:'Inspiré des critères de convergence du cours — Séries numériques.'},
-{q:'Soient uₙ et vₙ positifs à partir d’un certain rang et uₙ~vₙ. Quelles assertions sont vraies ?',choices:['Σuₙ et Σvₙ sont de même nature','Si Σvₙ converge alors Σuₙ converge','Si Σuₙ diverge alors Σvₙ diverge','On a nécessairement uₙ=vₙ à partir d’un certain rang','uₙ/vₙ tend vers 1'],correct:[0,1,2,4],explain:['Vrai : critère d’équivalence pour des termes positifs.','Vrai.','Vrai, puisque les deux séries sont de même nature.','Faux : équivalence ne signifie pas égalité.','Vrai : c’est la définition de uₙ~vₙ lorsque vₙ est non nul.'],source:'Cours — Théorème de comparaison par équivalence des séries à termes positifs.'}
-],
-Algèbre:[
-{q:'Soit F une partie non vide d’un K-espace vectoriel E. Quelles assertions caractérisent F comme sous-espace vectoriel ?',choices:['Pour tous x,y∈F, x+y∈F','Pour tout x∈F et λ∈K, λx∈F','Pour tous x,y∈F et λ,μ∈K, λx+μy∈F','0_E∈F et F est stable par combinaison linéaire','F doit être de dimension finie'],correct:[0,1,2,3],explain:['Vrai avec non-vacuité et stabilité scalaire.','Vrai avec non-vacuité et stabilité additive.','Vrai : critère direct.','Vrai.','Faux.'],source:'Cours — Espaces vectoriels et sous-espaces vectoriels.'},
-{q:'Pour une famille (x₁,…,xₚ) de vecteurs, quelles assertions sont vraies ?',choices:['Elle est libre si toute relation Σλᵢxᵢ=0 impose tous les λᵢ=0','Elle est liée s’il existe une relation non triviale Σλᵢxᵢ=0','Une famille contenant 0 est libre','Si un vecteur est combinaison linéaire des autres, la famille est liée','Toute sous-famille d’une famille libre est libre'],correct:[0,1,3,4],explain:['Vrai : définition.','Vrai : négation de la liberté.','Faux.','Vrai.','Vrai.'],source:'Cours — Familles libres et liées.'},
-{q:'Soient F et G deux sous-espaces d’un espace vectoriel E. Quelles assertions sont vraies ?',choices:['F+G est directe si et seulement si F∩G={0}','Si F∩G={0}, tout vecteur de F+G possède une unique décomposition f+g','Si F+G=E alors nécessairement E=F⊕G','Si E=F⊕G alors F+G=E et F∩G={0}','En dimension finie, dim(F+G)=dim F+dim G−dim(F∩G)'],correct:[0,1,3,4],explain:['Vrai.','Vrai.','Faux : il faut aussi F∩G={0}.','Vrai.','Vrai : formule de Grassmann.'],source:'Cours — Sommes et sommes directes de sous-espaces.'}
-]};
+  "Analyse": [
+    {
+      "q": "Pour n ≥ 1, on pose uₙ = sin(1/n) − 1/n + 1/(6n³). Quelles assertions sont vraies ?",
+      "choices": [
+        "La série Σuₙ est absolument convergente.",
+        "uₙ est équivalent à −1/(120n⁵).",
+        "n⁵uₙ tend vers 1/120.",
+        "La série Σuₙ diverge car les deux premiers termes se compensent.",
+        "uₙ = o(1/n⁴)."
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ],
+      "explain": [
+        "Taylor-Young donne uₙ ~ 1/(120n⁵), donc comparaison absolue à une série de Riemann convergente.",
+        "Le coefficient du terme d’ordre 5 dans sin(x) est +1/120.",
+        "Le développement à l’ordre 5 donne exactement cette limite.",
+        "La compensation impose de poursuivre le développement ; elle ne signifie pas divergence.",
+        "uₙ/(1/n⁴) ~ 1/(120n), qui tend vers 0."
+      ],
+      "bankVersion": 3,
+      "source": "Question originale fondée sur les notions du cours. Niveau calibré à l’aide des DS 2024 fournis ; aucun énoncé de ces DS repris. Aucune attribution à une annale officielle GEI-UNIV."
+    },
+    {
+      "q": "On pose vₙ = 1/n + (−1)ⁿ/n^(3/4), pour n ≥ 1. Quelles assertions sont vraies ?",
+      "choices": [
+        "vₙ tend vers 0.",
+        "La série Σvₙ converge par le critère des séries alternées.",
+        "La série Σ|vₙ| converge.",
+        "Les sommes partielles de Σvₙ tendent vers +∞.",
+        "La limite |vₙ₊₁/vₙ| est strictement inférieure à 1."
+      ],
+      "correct": [
+        0,
+        3
+      ],
+      "explain": [
+        "Les deux termes tendent vers 0.",
+        "Le terme ajouté 1/n empêche d’appliquer ce critère directement à vₙ ; la série harmonique diverge.",
+        "Pour n assez grand, |vₙ| ≥ n^(−3/4) − n^(−1) ≥ (1/2)n^(−3/4), donc divergence par comparaison.",
+        "La partie alternée converge et ses sommes partielles restent bornées ; la partie harmonique tend vers +∞.",
+        "vₙ ~ (−1)ⁿ/n^(3/4), donc le rapport des modules tend vers 1."
+      ],
+      "bankVersion": 3,
+      "source": "Question originale fondée sur les notions du cours. Niveau calibré à l’aide des DS 2024 fournis ; aucun énoncé de ces DS repris. Aucune attribution à une annale officielle GEI-UNIV."
+    },
+    {
+      "q": "Pour n ≥ 1, soit zₙ = (1 + i/√n)ⁿ. Quelles assertions sont vraies ?",
+      "choices": [
+        "|zₙ| tend vers 0.",
+        "Σzₙ converge absolument.",
+        "La limite de |zₙ₊₁|/|zₙ| est strictement inférieure à 1.",
+        "Σzₙ diverge parce que son terme général ne tend pas vers 0.",
+        "|zₙ| tend vers 1."
+      ],
+      "correct": [
+        3
+      ],
+      "explain": [
+        "|zₙ| = (1+1/n)^(n/2) tend vers √e, qui est non nul.",
+        "La convergence absolue imposerait |zₙ|→0, ce qui est faux.",
+        "Les deux modules tendent vers √e ; leur rapport tend vers 1.",
+        "Une série convergente doit avoir un terme général tendant vers 0. Ici son module tend vers √e.",
+        "La limite est √e."
+      ],
+      "bankVersion": 3,
+      "source": "Question originale fondée sur les notions du cours. Niveau calibré à l’aide des DS 2024 fournis ; aucun énoncé de ces DS repris. Aucune attribution à une annale officielle GEI-UNIV."
+    }
+  ],
+  "Algèbre": [
+    {
+      "q": "Dans ℝ⁴, on pose F₁ = Vect(e₁), F₂ = Vect(e₂) et F₃ = Vect(e₁ + e₂). Quelles assertions sont vraies ?",
+      "choices": [
+        "F₁ + F₂ + F₃ est une somme directe.",
+        "La dimension de F₁ + F₂ + F₃ est 2.",
+        "F₁ ∩ F₂ ∩ F₃ contient un vecteur non nul.",
+        "Les trois générateurs e₁, e₂ et e₁+e₂ sont libres.",
+        "F₁ + F₂ + F₃ = ℝ⁴."
+      ],
+      "correct": [
+        1
+      ],
+      "explain": [
+        "La relation e₁ + e₂ − (e₁+e₂)=0 est non triviale ; la somme n’est pas directe.",
+        "F₃ est inclus dans Vect(e₁,e₂), et e₁,e₂ sont libres.",
+        "Déjà F₁∩F₂={0}, donc l’intersection des trois sous-espaces est {0}.",
+        "Le troisième générateur est la somme des deux premiers.",
+        "La somme est de dimension 2, alors que ℝ⁴ est de dimension 4."
+      ],
+      "bankVersion": 3,
+      "source": "Question originale fondée sur les notions du cours. Niveau calibré à l’aide des DS 2024 fournis ; aucun énoncé de ces DS repris. Aucune attribution à une annale officielle GEI-UNIV."
+    },
+    {
+      "q": "Soient F et G deux sous-espaces d’un espace E de dimension 7, avec dim F = 5 et dim G = 4. Quelles assertions sont nécessairement vraies ?",
+      "choices": [
+        "dim(F ∩ G) ≥ 2.",
+        "dim(F ∩ G) = 2.",
+        "dim(F + G) ≤ 7.",
+        "F + G est une somme directe.",
+        "F + G = E."
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "explain": [
+        "Grassmann donne dim(F∩G)=9−dim(F+G)≥2.",
+        "L’intersection peut aussi avoir dimension 3 ou 4 ; par exemple G⊂F donne 4.",
+        "F+G est un sous-espace de E.",
+        "L’intersection a dimension au moins 2, donc elle n’est pas réduite à {0}.",
+        "Si G⊂F, alors F+G=F, de dimension 5, et la somme n’est pas E."
+      ],
+      "bankVersion": 3,
+      "source": "Question originale fondée sur les notions du cours. Niveau calibré à l’aide des DS 2024 fournis ; aucun énoncé de ces DS repris. Aucune attribution à une annale officielle GEI-UNIV."
+    },
+    {
+      "q": "Soit f : ℝ⁴ → ℝ³ définie par f(x,y,z,t) = (x+2z, y−t, x+y+2z−t). Quelles assertions sont vraies ?",
+      "choices": [
+        "Le rang de f est 2.",
+        "dim Ker(f) = 2.",
+        "f est injective.",
+        "f est surjective sur ℝ³.",
+        "Im(f) = {(a,b,c) ∈ ℝ³ : c = a+b}."
+      ],
+      "correct": [
+        0,
+        1,
+        4
+      ],
+      "explain": [
+        "Tout résultat s’écrit (a,b,a+b), et chaque tel vecteur est atteint en prenant (x,y,z,t)=(a,b,0,0). Cette image est de dimension 2.",
+        "Le théorème du rang donne 4−2=2 ; on peut aussi résoudre x=−2z et y=t.",
+        "Son noyau est de dimension 2, donc non trivial.",
+        "Son image est de dimension 2, strictement inférieure à 3.",
+        "La troisième coordonnée est la somme des deux premières, et la réciproque est obtenue par l’antécédent (a,b,0,0)."
+      ],
+      "bankVersion": 3,
+      "source": "Question originale fondée sur les notions du cours. Niveau calibré à l’aide des DS 2024 fournis ; aucun énoncé de ces DS repris. Aucune attribution à une annale officielle GEI-UNIV."
+    }
+  ]
+};
+
 let S=JSON.parse(localStorage.getItem('cpesV2')||'null')||{tasks:[],content:[],gei:{},langs:[],news:[],calendarEvents:[]}; S.news=S.news||[]; S.calendarEvents=S.calendarEvents||[]; let calOffset=0; let currentSubject='Algèbre'; let weekOffset=0; let selectedWeekDay=null;
 function save(){localStorage.setItem('cpesV2',JSON.stringify(S))} function dateISO(d=new Date()){let x=new Date(d);x.setMinutes(x.getMinutes()-x.getTimezoneOffset());return x.toISOString().slice(0,10)} function parseDate(s){return new Date(s+'T12:00:00')} function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 const nav=[['dashboard','Accueil'],['todo','Semaine'],['calendar','Calendrier'],['daily','Cours quotidien'],['gei','GEI / UNIV'],['python','Python'],['subjects','Matières'],['review','Planning'],['news','News'],['languages','Langues'],['courses','Mes cours']];
@@ -96,13 +230,13 @@ function dayTaskGroups(arr,ws){const names=['Lundi','Mardi','Mercredi','Jeudi','
 
 function renderTasks(){ensureDailyTasks();renderWeekNav();let [ws,we]=weekRange(),start=dateISO(ws),end=dateISO(we);renderWeekDays(ws);let arr=S.tasks.filter(t=>t.due>=start&&t.due<=end).sort((a,b)=>(a.done-b.done)||a.due.localeCompare(b.due));document.getElementById('taskList').innerHTML=dayTaskGroups(arr,ws);let names=subjects.map(x=>x[0]);let rows=names.map(n=>{let a=S.tasks.filter(t=>t.subject===n&&t.due>=start&&t.due<=end),done=a.filter(t=>t.done).length,total=a.length,p=total?Math.round(100*done/total):0;return `<tr><td><strong>${n}</strong></td><td><span class="countpill">${total-done}</span></td><td>${done}</td><td><div class="progress"><div style="width:${p}%"></div></div><span class="tiny muted">${p}%</span></td></tr>`}).join('');document.getElementById('weekBody').innerHTML=rows}
 function geiDayInfo(date){let diff=Math.floor((parseDate(date)-parseDate(START))/DAY);let subject=diff%2===0?'Analyse':'Algèbre';return {diff,subject}}
-function ensureGEI(){let today=dateISO();if(today<START)return;let cur=parseDate(START),end=parseDate(today);while(cur<=end){let ds=dateISO(cur),info=geiDayInfo(ds),bank=seedGEI[info.subject],base=((Math.max(0,info.diff)*3)%bank.length);if(!S.gei[ds])S.gei[ds]=[];for(let k=0;k<3;k++){let old=S.gei[ds][k],src=bank[(base+k)%bank.length];if(!old||!old.choices){S.gei[ds][k]={id:old?.id||`${ds}-${k}`,subject:info.subject,...src,selected:[],validated:false,score:null,legacyAnswer:old?.answer||''};}}cur=new Date(cur.getTime()+DAY)}save()}
+function ensureGEI(){let today=dateISO();if(today<START)return;let cur=parseDate(START),end=parseDate(today);while(cur<=end){let ds=dateISO(cur),info=geiDayInfo(ds),bank=seedGEI[info.subject],base=((Math.max(0,info.diff)*3)%bank.length);if(!S.gei[ds])S.gei[ds]=[];for(let k=0;k<3;k++){let old=S.gei[ds][k],src=bank[(base+k)%bank.length];if(!old||!old.choices||(!old.validated&&old.bankVersion!==3)){S.gei[ds][k]={id:old?.id||`${ds}-${k}`,subject:info.subject,...src,selected:[],validated:false,score:null,previousQuestion:old?.choices?old:null,legacyAnswer:old?.answer||''};}}cur=new Date(cur.getTime()+DAY)}save()}
 function pendingGEI(){return Object.entries(S.gei).flatMap(([date,qs])=>qs.map(q=>({...q,date}))).filter(q=>!q.validated).sort((a,b)=>a.date.localeCompare(b.date))}
 function toggleGEI(id,n){let q=findGEI(id);if(!q||q.validated)return;q.selected=q.selected||[];q.selected=q.selected.includes(n)?q.selected.filter(x=>x!==n):[...q.selected,n];save();renderGEI()}
 function findGEI(id){for(let qs of Object.values(S.gei)){let q=qs.find(x=>x.id===id);if(q)return q}}
 function validateGEI(id){let q=findGEI(id);if(!q||q.validated)return;let good=new Set(q.correct||[]),sel=new Set(q.selected||[]),ok=0;for(let i=0;i<5;i++)if(sel.has(i)===good.has(i))ok++;q.score=Math.round(ok*2)/10;q.validated=true;q.done=true;save();renderGEI();renderDashboard()}
 function resetGEI(id){let q=findGEI(id);if(!q)return;q.selected=[];q.validated=false;q.done=false;q.score=null;save();renderGEI();renderDashboard()}
-function geiQuestionHTML(q,i){let good=new Set(q.correct||[]),sel=new Set(q.selected||[]);let choices=(q.choices||[]).map((x,n)=>{let state=q.validated?(sel.has(n)===good.has(n)?'✓':'✗'):'';let bg=q.validated?(sel.has(n)===good.has(n)?'background:#eaf8ef;border-color:#65a879':'background:#fff0f0;border-color:#d97878'):' ';return `<label style="display:block;padding:10px 12px;margin:7px 0;border:1px solid var(--line);border-radius:9px;${bg}"><input type="checkbox" ${sel.has(n)?'checked':''} ${q.validated?'disabled':''} onchange="toggleGEI('${q.id}',${n})"> <b>${'ABCDE'[n]}.</b> ${esc(x)} ${q.validated?`<b style="float:right">${state}</b>`:''}</label>`}).join('');let corr=q.validated?`<div class="item method"><b>Score : ${q.score.toFixed(1)}/1</b><p class="tiny muted">Barème GEI : +0,2 pour chaque décision correcte (cocher une assertion vraie ou laisser décochée une assertion fausse).</p>${q.choices.map((x,n)=>`<p><b>${'ABCDE'[n]} — ${good.has(n)?'Vrai':'Faux'} :</b> ${esc(q.explain[n])}</p>`).join('')}<p class="tiny"><b>Source :</b> ${esc(q.source||'')}</p><button class="btn alt" onclick="resetGEI('${q.id}')">Recommencer</button></div>`:'';return `<div class="gei ${q.validated?'done':'pending'}"><strong>Question ${i+1}</strong><p>${esc(q.q)}</p>${choices}${q.legacyAnswer?`<p class="tiny muted"><b>Ancienne réponse conservée :</b> ${esc(q.legacyAnswer)}</p>`:''}${q.validated?corr:`<button class="btn" onclick="validateGEI('${q.id}')">Valider</button>`}</div>`}
+function geiQuestionHTML(q,i){let good=new Set(q.correct||[]),sel=new Set(q.selected||[]);let choices=(q.choices||[]).map((x,n)=>{let state=q.validated?(sel.has(n)===good.has(n)?'✓':'✗'):'';let bg=q.validated?(sel.has(n)===good.has(n)?'background:#eaf8ef;border-color:#65a879':'background:#fff0f0;border-color:#d97878'):' ';return `<label style="display:block;padding:10px 12px;margin:7px 0;border:1px solid var(--line);border-radius:9px;${bg}"><input type="checkbox" ${sel.has(n)?'checked':''} ${q.validated?'disabled':''} onchange="toggleGEI('${q.id}',${n})"> <b>${'ABCDE'[n]}.</b> ${esc(x)} ${q.validated?`<b style="float:right">${state}</b>`:''}</label>`}).join('');let corr=q.validated?`<div class="item method"><b>Score : ${q.score.toFixed(1)}/1</b><p class="tiny muted">Score d’entraînement : +0,2 par décision correcte. Ce score ne prétend pas reproduire le barème officiel d’une session.</p>${q.choices.map((x,n)=>`<p><b>${'ABCDE'[n]} — ${good.has(n)?'Vrai':'Faux'} :</b> ${esc(q.explain[n])}</p>`).join('')}<p class="tiny"><b>Source :</b> ${esc(q.source||'')}</p><button class="btn alt" onclick="resetGEI('${q.id}')">Recommencer</button></div>`:'';return `<div class="gei ${q.validated?'done':'pending'}"><strong>Question ${i+1}</strong><p>${esc(q.q)}</p>${choices}${q.legacyAnswer?`<p class="tiny muted"><b>Ancienne réponse conservée :</b> ${esc(q.legacyAnswer)}</p>`:''}${q.validated?corr:`<button class="btn" onclick="validateGEI('${q.id}')">Valider</button>`}</div>`}
 function renderGEI(){ensureGEI();let arr=Object.entries(S.gei).sort((a,b)=>b[0].localeCompare(a[0]));document.getElementById('geiList').innerHTML=arr.length?arr.map(([d,qs])=>`<div class="card sectiongap"><div class="row"><h3>${d}</h3><span class="tag">${qs[0].subject}</span></div>${qs.map(geiQuestionHTML).join('')}</div>`).join(''):'<div class="card">Les GEI commencent le 1er octobre 2026.</div>'}
 function renderSubjects(){document.getElementById('subjectGrid').innerHTML=subjects.map(([n,d])=>{let c=S.content.filter(x=>x.subject===n).length;return `<div class="card subject" onclick="openSubject('${n}')"><h3>${n}</h3><p class="muted">${d}</p><div class="progress"><div style="width:${Math.min(100,c*10)}%"></div></div><p class="tiny">${c} élément(s)</p></div>`}).join('')}
 function openSubject(n){currentSubject=n;document.getElementById('subjectTitle').textContent=n;document.getElementById('subjectDesc').textContent=subjects.find(x=>x[0]===n)?.[1]||'';show('subject')}
@@ -338,7 +472,7 @@ ensureDailyTasks();renderNav();show('dashboard');
   if(e.key==='Tab'){e.preventDefault();const t=$('pyCommand');t.setRangeText('    ',t.selectionStart,t.selectionEnd,'end');}
  });
  const oldShow=window.show;window.show=function(id){oldShow(id);if(id==='python'){update();start();}};
- window.addEventListener('hashchange',()=>{if(['#python','#news'].includes(location.hash))window.show(location.hash.slice(1));});
+ window.addEventListener('hashchange',()=>{if(['#python','#news','#gei'].includes(location.hash))window.show(location.hash.slice(1));});
  update();controls();
  if(location.hash==='#python')window.show('python');
 })();
