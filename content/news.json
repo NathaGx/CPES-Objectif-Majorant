@@ -1,0 +1,136 @@
+{
+  "briefs": [
+    {
+      "date": "2026-10-02",
+      "sourceDate": "2026-10-01",
+      "items": [
+        {
+          "language": "en",
+          "title": "US factories keep growing, but costs rise",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/business/us-manufacturing-steady-september-input-prices-increase-2026-10-01/",
+          "summary": "US manufacturing continued to expand in September. The ISM index slipped slightly to 54.5, while the measure of input prices rose sharply. Strong demand is supporting factories, but higher production costs suggest that inflation pressures remain persistent.",
+          "vocabulary": [
+            [
+              "input costs",
+              "the cost of materials used in production"
+            ],
+            [
+              "threshold",
+              "a level separating two conditions"
+            ],
+            [
+              "supply chain",
+              "the network that produces and delivers goods"
+            ]
+          ]
+        },
+        {
+          "language": "en",
+          "title": "Germany’s growth forecast improves, according to a draft",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/world/europe/german-government-raises-forecasts-2026-2027-source-said-2026-10-01/",
+          "summary": "A source familiar with a government draft told Reuters that Germany’s growth forecast for 2026 had been raised from 0.5% to 1.3%. Public investment is helping the economy, although inflation remains a concern. The figures are due to be presented officially on October 8.",
+          "vocabulary": [
+            [
+              "forecast",
+              "an estimate of what may happen"
+            ],
+            [
+              "resilience",
+              "the ability to withstand difficulties"
+            ],
+            [
+              "public investment",
+              "government spending on long-term projects"
+            ]
+          ]
+        },
+        {
+          "language": "en",
+          "title": "AI helps users fix objects before 3D printing",
+          "source": "MIT News",
+          "url": "https://news.mit.edu/2026/instructmesh-tool-lets-users-repair-ai-3d-models-then-fabricate-them-1001",
+          "summary": "Researchers developed InstructMesh, a tool for editing AI-generated 3D designs before printing them. Users can select an area and describe the change they want. The aim is to make objects that work in practice, rather than designs that merely look convincing.",
+          "vocabulary": [
+            [
+              "design flaw",
+              "a problem in how an object is designed"
+            ],
+            [
+              "fabrication",
+              "the process of making an object"
+            ],
+            [
+              "refine",
+              "to improve something through small changes"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "España rechaza el nuevo reglamento europeo de retornos",
+          "source": "Euronews",
+          "url": "https://es.euronews.com/2026/10/01/espana-ue-reglamento-retornos-inmigrantes-deportaciones-ceuta",
+          "summary": "España fue el único país de la UE que votó contra el nuevo Reglamento de Retornos. El Gobierno comparte el objetivo de agilizar las expulsiones, pero cuestiona algunas garantías jurídicas y la creación de centros de retorno en terceros países. El debate enfrenta rapidez administrativa y protección de derechos.",
+          "vocabulary": [
+            [
+              "agilizar",
+              "hacer que un proceso sea más rápido"
+            ],
+            [
+              "garantías jurídicas",
+              "medidas legales que protegen los derechos"
+            ],
+            [
+              "terceros países",
+              "países ajenos al grupo mencionado"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "Las lluvias intensas provocan alertas en el este de España",
+          "source": "El País",
+          "url": "https://elpais.com/el-tiempo/2026-10-01/ultima-hora-del-temporal-en-espana-en-directo.html",
+          "summary": "Las autoridades enviaron alertas a la población por lluvias torrenciales en zonas de Valencia, Castellón y Tarragona. Varios municipios suspendieron las clases y Renfe interrumpió algunos servicios. Los responsables de emergencias pidieron prudencia y recomendaron evitar desplazamientos innecesarios ante el riesgo de inundaciones.",
+          "vocabulary": [
+            [
+              "lluvias torrenciales",
+              "precipitaciones muy intensas"
+            ],
+            [
+              "desplazamiento",
+              "viaje de un lugar a otro"
+            ],
+            [
+              "inundación",
+              "acumulación de agua en una zona normalmente seca"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "Las protestas estudiantiles se extienden en Francia",
+          "source": "El País",
+          "url": "https://elpais.com/internacional/2026-10-01/las-protestas-estudiantiles-se-extienden-por-francia-mientras-el-gobierno-acusa-al-partido-de-melenchon-de-alentar-la-violencia-urbana.html",
+          "summary": "Las movilizaciones iniciadas para denunciar la falta de recursos educativos se extendieron por Francia. En algunas ciudades se produjeron enfrentamientos y daños materiales. El Gobierno acusó a La Francia Insumisa de alentar los bloqueos; esa acusación debe distinguirse de las reivindicaciones expresadas por los estudiantes.",
+          "vocabulary": [
+            [
+              "reivindicación",
+              "petición de un derecho o de una mejora"
+            ],
+            [
+              "enfrentamiento",
+              "conflicto directo entre grupos"
+            ],
+            [
+              "recortes",
+              "reducciones de recursos o de gastos"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
