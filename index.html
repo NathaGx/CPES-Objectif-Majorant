@@ -295,6 +295,8 @@ ensureDailyTasks();renderNav();show('dashboard');
  $('pyFile').onchange=async e=>{const file=e.target.files[0];if(file){if(code.value!==initial&&!confirm('Remplacer le code actuel par ce fichier ?'))return;code.value=await file.text();update();}e.target.value='';};
  $('pyInstall').onclick=()=>{const packages=$('pyPackages').value.trim().split(/\s*,\s*|\s+/).filter(Boolean);if(!packages.length)return;if(!ready){start();output('Attends le chargement de Python, puis clique à nouveau sur Installer.\n');return;}busy=true;controls();status('Installation…');worker.postMessage({action:'install',id:'install',packages});};
  const oldShow=window.show;window.show=function(id){oldShow(id);if(id==='python'){update();start();}};
+ window.addEventListener('hashchange',()=>{if(location.hash==='#python')window.show('python');});
  update();controls();
+ if(location.hash==='#python')window.show('python');
 })();
 </script></body></html>
