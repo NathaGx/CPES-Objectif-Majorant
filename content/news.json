@@ -131,6 +131,162 @@
           ]
         }
       ]
+    },
+    {
+      "date": "2026-10-03",
+      "sourceDate": "2026-10-02",
+      "items": [
+        {
+          "language": "en",
+          "title": "G7 agrees to release 100 million barrels from emergency energy stocks",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/business/energy/europe-discussing-plan-diesel-stock-releases-after-us-pressure-source-says-2026-10-02/",
+          "summary": "G7 countries agreed to release 100 million barrels of diesel and crude oil from emergency reserves through the International Energy Agency. The coordinated release will begin immediately and last four months, as governments try to ease fuel prices and supply pressure. The G7 also promised to avoid energy-export restrictions, although it did not specify how much each country would contribute.",
+          "vocabulary": [
+            [
+              "emergency reserves",
+              "stocks kept for use during a serious supply disruption"
+            ],
+            [
+              "to draw down",
+              "to reduce a stock by using part of it"
+            ],
+            [
+              "export restrictions",
+              "rules that limit goods sold abroad"
+            ],
+            [
+              "to ease pressure",
+              "to make a difficult situation less severe"
+            ]
+          ]
+        },
+        {
+          "language": "en",
+          "title": "Brazil’s next president could reshape powerful institutions",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/world/americas/how-brazils-election-winner-could-reshape-its-institutions-vacancies-mount-2026-10-02/",
+          "summary": "Brazil’s next president is expected to inherit an unusually large number of vacancies at the Supreme Court, central bank and financial regulators. The winner could therefore gain major influence over monetary policy, market oversight and constitutional interpretation. Reuters reports that Congress has increasingly used confirmation hearings as political leverage, reducing the executive branch’s freedom of action.",
+          "vocabulary": [
+            [
+              "vacancy",
+              "an official position that is currently unfilled"
+            ],
+            [
+              "appointment",
+              "the act of choosing someone for an official position"
+            ],
+            [
+              "political leverage",
+              "influence used to obtain a political advantage"
+            ],
+            [
+              "room for manoeuvre",
+              "freedom to act or make decisions"
+            ]
+          ]
+        },
+        {
+          "language": "en",
+          "title": "Dutch eyewear chain suspends Meta smart-glasses sales over privacy concerns",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/sustainability/dutch-eyewear-chain-hans-anders-halts-sale-meta-glasses-citing-privacy-concerns-2026-10-02/",
+          "summary": "Hans Anders, a major Dutch eyewear chain, suspended sales of Meta’s Ray-Ban smart glasses in the Netherlands and Belgium. The decision follows growing concern about covert recording and the use of images showing identifiable people. Meta says a blinking light signals when the camera is recording, while Dutch privacy authorities stress that publishing such videos normally requires consent.",
+          "vocabulary": [
+            [
+              "to suspend sales",
+              "to stop selling a product temporarily"
+            ],
+            [
+              "covert recording",
+              "filming or recording done secretly"
+            ],
+            [
+              "identifiable",
+              "able to be recognised or named"
+            ],
+            [
+              "consent",
+              "permission freely given for something to happen"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "La misión Crew-13 completa el viaje más rápido de una nave estadounidense a la EEI",
+          "source": "EFE",
+          "url": "https://efe.com/ciencia-y-tecnologia/2026-10-02/nasa-viaje-rapido-estacion-espacial-internacional-astronautas/",
+          "summary": "La misión Crew-13 de la NASA y SpaceX llegó a la Estación Espacial Internacional tras un vuelo de 7 horas y 55 minutos, el acoplamiento más rápido de una nave estadounidense con la EEI. Sus cuatro tripulantes se incorporarán a la Expedición 75. Durante los próximos meses estudiarán tejidos derivados de células madre, el cultivo de alimentos y los efectos de la microgravedad en el flujo sanguíneo.",
+          "vocabulary": [
+            [
+              "el acoplamiento",
+              "la unión de una nave espacial con otra estructura en órbita"
+            ],
+            [
+              "la tripulación",
+              "el conjunto de personas que trabaja a bordo de una nave"
+            ],
+            [
+              "las células madre",
+              "células capaces de transformarse en distintos tipos celulares"
+            ],
+            [
+              "la microgravedad",
+              "condición en la que los efectos aparentes de la gravedad son muy pequeños"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "España registra su mayor aumento del empleo en un mes de septiembre",
+          "source": "EFE",
+          "url": "https://efe.com/economia/2026-10-02/regularizacion-lleva-empleo-espana-mejor-septiembre-92-327-ocupados-mas/",
+          "summary": "La afiliación a la Seguridad Social aumentó en 92.327 personas en septiembre, el mejor resultado registrado para ese mes, impulsado por la regularización extraordinaria de trabajadores extranjeros y el inicio del curso escolar. España alcanzó 22,43 millones de afiliados. Sin embargo, el paro registrado también subió en 23.587 personas, lo que muestra una evolución laboral positiva pero desigual.",
+          "vocabulary": [
+            [
+              "la afiliación",
+              "la inscripción de un trabajador en la Seguridad Social"
+            ],
+            [
+              "la regularización",
+              "el proceso que da situación legal a una persona o actividad"
+            ],
+            [
+              "el paro registrado",
+              "el número de personas inscritas oficialmente como desempleadas"
+            ],
+            [
+              "interanual",
+              "comparado con el mismo periodo del año anterior"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "Las latinas dirigen 2,9 millones de negocios en Estados Unidos",
+          "source": "EFE",
+          "url": "https://efe.com/economia/2026-10-02/latinas-lideran-millones-negocios-eeuu/",
+          "summary": "Las empresarias latinas lideran 2,9 millones de negocios en Estados Unidos, según la Cámara de Comercio de Mujeres, pero solo el 0,1 % tendría acceso a financiación de capital. La organización quiere ayudar a estas empresas a crecer fuera del ámbito local mediante formación, mentorías y redes de apoyo. El dato ilustra tanto el peso económico de las emprendedoras hispanas como la brecha de financiación que afrontan.",
+          "vocabulary": [
+            [
+              "la financiación de capital",
+              "dinero invertido en una empresa a cambio de participación"
+            ],
+            [
+              "la emprendedora",
+              "una mujer que crea y desarrolla un negocio"
+            ],
+            [
+              "la mentoría",
+              "el acompañamiento profesional de una persona con experiencia"
+            ],
+            [
+              "la brecha de financiación",
+              "la diferencia entre el capital necesario y el disponible"
+            ]
+          ]
+        }
+      ]
     }
   ]
 }
