@@ -287,6 +287,162 @@
           ]
         }
       ]
+    },
+    {
+      "date": "2026-10-08",
+      "sourceDate": "2026-10-07",
+      "items": [
+        {
+          "language": "en",
+          "title": "EU seeks to narrow its trade deficit with China",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/world/china/eu-seeks-cut-trade-deficit-with-china-talks-with-beijing-2026-10-07/",
+          "summary": "EU Trade Commissioner Maroš Šefčovič travelled to Beijing for talks aimed at reducing the bloc’s widening goods-trade deficit with China, now exceeding €1 billion a day. Brussels wants better market access for European firms and action on rapidly rising Chinese exports, while also raising concerns about restrictions on rare earths and other critical minerals. The discussions come before an EU leaders’ summit where relations with China will be a central issue.",
+          "vocabulary": [
+            [
+              "trade deficit",
+              "a situation in which a country or bloc imports more goods than it exports"
+            ],
+            [
+              "market access",
+              "the ability of companies to sell goods or services in a market"
+            ],
+            [
+              "curb",
+              "to limit or reduce something"
+            ],
+            [
+              "critical minerals",
+              "raw materials considered essential for industry and technology"
+            ]
+          ]
+        },
+        {
+          "language": "en",
+          "title": "US voters say political leaders are not taking AI risks seriously enough",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/world/most-us-voters-say-trump-congress-dont-take-ai-risks-seriously-reutersipsos-poll-2026-10-07/",
+          "summary": "A Reuters/Ipsos poll found that majorities of registered US voters believe both the Trump administration and Congress are not taking artificial-intelligence risks seriously enough. Eighty-four percent see AI as a threat to American workers, while a bipartisan majority supports stricter regulation. The findings show that job losses, safety and the rapid expansion of data centres have turned AI into an important political issue before the November midterm elections.",
+          "vocabulary": [
+            [
+              "across the political spectrum",
+              "among people with different political views"
+            ],
+            [
+              "bipartisan",
+              "supported by the two main political parties"
+            ],
+            [
+              "midterm elections",
+              "US elections held halfway through a president’s term"
+            ],
+            [
+              "to pose a threat",
+              "to create a possible danger"
+            ]
+          ]
+        },
+        {
+          "language": "en",
+          "title": "European bank shares fall as bond yields and oil prices rise",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/business/finance/european-bank-shares-fall-bond-yields-surge-spreads-widen-2026-10-07/",
+          "summary": "Shares in major European banks dropped sharply as a global bond selloff and higher oil prices renewed fears that inflation could accelerate again. The STOXX Europe Banks index fell about 3.5%, with several large French, German and Italian banks losing more than 4%. Investors are worried that rising sovereign-bond yields could reduce the value of banks’ bond holdings and spread financial pressure across the euro area.",
+          "vocabulary": [
+            [
+              "bond yield",
+              "the return an investor receives from a bond"
+            ],
+            [
+              "selloff",
+              "a period of heavy selling that pushes prices down"
+            ],
+            [
+              "sovereign debt",
+              "money borrowed by a national government"
+            ],
+            [
+              "contagion",
+              "the spread of financial problems from one market or country to another"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "Kagan y Soai ganan el Nobel de Química por avances hacia la homoquiralidad",
+          "source": "EFE",
+          "url": "https://efe.com/ciencia-y-tecnologia/2026-10-07/premio-nobel-quimica-2026/",
+          "summary": "Henri B. Kagan y Kenso Soai recibieron el Premio Nobel de Química 2026 por descubrir efectos no lineales y la autocatálisis en la síntesis orgánica asimétrica. Sus trabajos permiten favorecer una de las dos formas especulares posibles de una molécula y ayudan a explicar cómo puede surgir la homoquiralidad característica de los seres vivos. Estos avances son importantes para fabricar fármacos, aromas, productos agrícolas y nuevos materiales.",
+          "vocabulary": [
+            [
+              "la homoquiralidad",
+              "el predominio de una sola orientación molecular en un sistema"
+            ],
+            [
+              "la autocatálisis",
+              "una reacción en la que el producto acelera su propia formación"
+            ],
+            [
+              "la síntesis asimétrica",
+              "la producción preferente de una forma espacial de una molécula"
+            ],
+            [
+              "la imagen especular",
+              "una forma reflejada como en un espejo"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "Google abre al público una herramienta para detectar contenido generado con IA",
+          "source": "EFE",
+          "url": "https://efe.com/ciencia-y-tecnologia/2026-10-07/google-synthid-detector-herramienta-ia/",
+          "summary": "Google puso a disposición del público SynthID Detector, una plataforma que permite comprobar si una imagen, un vídeo o un audio contiene una marca de agua digital asociada a la inteligencia artificial. El sistema reconoce contenido de modelos de Google y de empresas colaboradoras como OpenAI, Nvidia y Kakao. La herramienta busca facilitar la identificación de material sintético en un entorno digital cada vez más expuesto a los deepfakes.",
+          "vocabulary": [
+            [
+              "la marca de agua digital",
+              "una señal insertada en un archivo para identificar su origen"
+            ],
+            [
+              "rastrear",
+              "buscar y seguir la presencia de una señal o información"
+            ],
+            [
+              "el contenido sintético",
+              "material creado o modificado mediante sistemas artificiales"
+            ],
+            [
+              "el deepfake",
+              "contenido manipulado con IA para imitar de forma realista a una persona"
+            ]
+          ]
+        },
+        {
+          "language": "es",
+          "title": "Una jueza ecuatoriana declara inocentes a 32 tripulantes de barcos bombardeados",
+          "source": "EFE",
+          "url": "https://efe.com/mundo/declaran-inocentes-tripulantes-barcos-bombardeos-estados-unidos/",
+          "summary": "Una jueza de Ecuador absolvió a 32 tripulantes de dos barcos pesqueros interceptados y bombardeados por fuerzas estadounidenses en el Pacífico. Los acusados habían sido procesados por supuesta asociación ilícita y vínculos con el narcotráfico, pero el tribunal concluyó que la Fiscalía no había demostrado la existencia de un delito. Es la primera sentencia de varios procesos relacionados con cinco embarcaciones y 88 tripulantes.",
+          "vocabulary": [
+            [
+              "absolver",
+              "declarar judicialmente que una persona no es culpable"
+            ],
+            [
+              "la asociación ilícita",
+              "la organización de personas para cometer delitos"
+            ],
+            [
+              "la Fiscalía",
+              "la institución que investiga y acusa en nombre del Estado"
+            ],
+            [
+              "la sentencia de primera instancia",
+              "una decisión judicial que todavía puede ser recurrida"
+            ]
+          ]
+        }
+      ]
     }
   ]
 }
