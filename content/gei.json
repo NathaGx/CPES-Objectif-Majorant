@@ -90,6 +90,90 @@
           "bankVersion": 5
         }
       ]
+    },
+    {
+      "date": "2026-10-09",
+      "subject": "Algèbre",
+      "items": [
+        {
+          "id": "gei-2026-10-09-0",
+          "subject": "Algèbre",
+          "q": "Soit n ≥ 2 et A ∈ Mₙ(ℝ) une matrice de rang 1. Quelles assertions sont vraies ?",
+          "choices": [
+            "Toutes les colonnes de A appartiennent à une même droite vectorielle.",
+            "Il existe deux vecteurs non nuls X,Y ∈ ℝⁿ tels que A = XYᵀ.",
+            "dim Ker(A) = n−1.",
+            "A² est nécessairement de rang 1.",
+            "tr(A) est nécessairement non nulle."
+          ],
+          "correct": [
+            0,
+            1,
+            2
+          ],
+          "explain": [
+            "L’espace engendré par les colonnes est l’image de l’application linéaire associée à A ; il est de dimension 1.",
+            "Choisissons une colonne non nulle X de A. Chaque colonne de A est un multiple yⱼX de X ; avec Y=(y₁,…,yₙ)ᵀ, on obtient A=XYᵀ, et X,Y sont non nuls puisque A≠0.",
+            "Par le théorème du rang, dim Ker(A)+rang(A)=n, donc dim Ker(A)=n−1.",
+            "Contre-exemple : pour A ayant pour seul coefficient non nul a₁₂=1, on a rang(A)=1 mais A²=0, donc rang(A²)=0.",
+            "Le même contre-exemple vérifie tr(A)=0."
+          ],
+          "source": "Création originale du 9 octobre 2026 ; aucun énoncé officiel ni question des DS fournis n’est repris. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 (barème QCM) : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Matrices de rang 1 et théorème du rang",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-09-1",
+          "subject": "Algèbre",
+          "q": "Soient E et F deux espaces vectoriels de dimension finie, f : E → F et g : F → E linéaires telles que g∘f = Id_E. Quelles assertions sont nécessairement vraies ?",
+          "choices": [
+            "f est injective.",
+            "g est injective.",
+            "f est surjective.",
+            "Ker(g) ∩ Im(f) = {0}.",
+            "dim(F) ≤ dim(E)."
+          ],
+          "correct": [
+            0,
+            3
+          ],
+          "explain": [
+            "Si f(x)=0, alors x=(g∘f)(x)=g(0)=0 ; ainsi Ker(f)={0}.",
+            "Ce n’est pas nécessaire : pour f(x)=(x,0) de ℝ vers ℝ² et g(x,y)=x, on a g∘f=Id_ℝ mais Ker(g)=Vect((0,1)).",
+            "Dans le même contre-exemple, Im(f)=Vect((1,0))≠ℝ².",
+            "Si y∈Ker(g)∩Im(f), il existe x∈E tel que y=f(x), puis 0=g(y)=g(f(x))=x ; donc y=f(0)=0.",
+            "L’injectivité de f impose au contraire dim(E)≤dim(F) ; le contre-exemple E=ℝ, F=ℝ² réfute l’inégalité proposée."
+          ],
+          "source": "Création originale du 9 octobre 2026 ; aucun énoncé officiel ni question des DS fournis n’est repris. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 (barème QCM) : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Applications linéaires et inverse à gauche",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-09-2",
+          "subject": "Algèbre",
+          "q": "Soit E un espace vectoriel de base B=(e₁,e₂,e₃). On définit u∈L(E) par u(e₁)=e₂, u(e₂)=e₃ et u(e₃)=0. Une seule réponse est correcte. Laquelle ?",
+          "choices": [
+            "u²=0.",
+            "u³=0.",
+            "Ker(u)=Vect(e₁).",
+            "Im(u)=Vect(e₁,e₂).",
+            "rang(u)=1."
+          ],
+          "correct": [
+            1
+          ],
+          "explain": [
+            "u²(e₁)=u(e₂)=e₃≠0, donc u² n’est pas l’endomorphisme nul.",
+            "On a u³(e₁)=u²(e₂)=u(e₃)=0, u³(e₂)=u²(e₃)=0 et u³(e₃)=0 ; comme B est une base, u³=0.",
+            "Pour x=ae₁+be₂+ce₃, u(x)=ae₂+be₃ ; ainsi u(x)=0 si et seulement si a=b=0, donc Ker(u)=Vect(e₃).",
+            "Les images des vecteurs de base engendrent Im(u)=Vect(e₂,e₃).",
+            "Les vecteurs e₂ et e₃ sont indépendants, donc Im(u) est de dimension 2 et rang(u)=2."
+          ],
+          "source": "Création originale du 9 octobre 2026 ; aucun énoncé officiel ni question des DS fournis n’est repris. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 (barème QCM) : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Endomorphismes nilpotents et matrice dans une base",
+          "difficulty": 2
+        }
+      ]
     }
   ]
 }
