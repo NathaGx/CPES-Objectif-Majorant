@@ -174,6 +174,90 @@
           "difficulty": 2
         }
       ]
+    },
+    {
+      "date": "2026-10-10",
+      "subject": "Analyse",
+      "items": [
+        {
+          "id": "gei-2026-10-10-0",
+          "subject": "Analyse",
+          "q": "Pour n ≥ 1, on pose uₙ = 1/n si n est un carré parfait, et uₙ = 1/n² sinon. Quelles assertions sont vraies ?",
+          "choices": [
+            "La suite (uₙ) tend vers 0.",
+            "La série Σuₙ converge.",
+            "On a uₙ = o(1/n).",
+            "La série Σ(nuₙ) converge.",
+            "La suite (nuₙ) est bornée."
+          ],
+          "correct": [
+            0,
+            1,
+            4
+          ],
+          "explain": [
+            "Dans tous les cas, 0 ≤ uₙ ≤ 1/n, donc uₙ tend vers 0 par comparaison.",
+            "La contribution des carrés n=k² vaut Σₖ 1/k², qui converge. Pour les autres indices, 0≤uₙ≤1/n² ; leur sous-série converge donc aussi.",
+            "Pour n=k², on a nuₙ=1. Le quotient uₙ/(1/n)=nuₙ ne tend donc pas vers 0.",
+            "Le terme général nuₙ vaut 1 lorsque n est un carré parfait ; il ne tend pas vers 0, donc la série Σ(nuₙ) diverge.",
+            "Si n est un carré, nuₙ=1 ; sinon nuₙ=1/n. Ainsi 0≤nuₙ≤1 pour tout n."
+          ],
+          "source": "Création originale du 10 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Séries positives et sous-séries",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-10-1",
+          "subject": "Analyse",
+          "q": "Pour α ∈ ℝ et n ≥ 2, on pose uₙ(α)=1/[n(ln n)^α]. Quelles assertions sont vraies ?",
+          "choices": [
+            "La série Σuₙ(α) converge si et seulement si α>1.",
+            "Pour α=1, la série converge conditionnellement.",
+            "Pour α=2, le reste R_N=Σₙ₌N₊₁^∞uₙ(2) vérifie R_N ~ 1/ln N.",
+            "Pour α=0, le terme général uₙ(0) ne tend pas vers 0.",
+            "Pour tout α<0, la série converge puisque uₙ(α) tend vers 0."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explain": [
+            "Par comparaison série-intégrale, ∫₂^∞ dx/[x(ln x)^α] se ramène par t=ln x à ∫_{ln 2}^∞ dt/t^α, qui converge exactement lorsque α>1.",
+            "Tous les termes sont positifs. Pour α=1, l’intégrale associée diverge comme ln(ln x), donc la série diverge ; il ne peut pas y avoir de convergence conditionnelle.",
+            "La fonction x↦1/[x(ln x)²] est positive décroissante à partir de 2. L’encadrement intégral du reste donne des bornes équivalentes à ∫_N^∞ dx/[x(ln x)²]=1/ln N.",
+            "Pour α=0, uₙ(0)=1/n tend vers 0, même si la série harmonique diverge.",
+            "La convergence du terme général vers 0 est seulement nécessaire. De plus, le critère série-intégrale donne ici la divergence puisque α<0≤1."
+          ],
+          "source": "Création originale du 10 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Séries de Bertrand et comparaison série-intégrale",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-10-2",
+          "subject": "Analyse",
+          "q": "Pour n ≥ 1, on pose uₙ = 1/√n − 2(√(n+1)−√n). Une seule réponse est correcte. Laquelle ?",
+          "choices": [
+            "uₙ<0 pour tout n≥1.",
+            "n^(3/2)uₙ tend vers 1/4.",
+            "La série Σuₙ diverge.",
+            "uₙ ~ 1/(2n).",
+            "La série Σ√uₙ converge."
+          ],
+          "correct": [
+            1
+          ],
+          "explain": [
+            "Comme √(n+1)+√n>2√n, on a 2(√(n+1)−√n)=2/[√(n+1)+√n]<1/√n ; donc uₙ>0.",
+            "Le développement √(1+x)=1+x/2−x²/8+o(x²), appliqué à x=1/n, donne 2(√(n+1)−√n)=1/√n−1/(4n^(3/2))+o(n^(−3/2)). Ainsi uₙ~1/(4n^(3/2)).",
+            "Puisque uₙ~1/(4n^(3/2)) avec des termes positifs, la série converge par comparaison à une série de Riemann d’exposant 3/2.",
+            "L’équivalent correct est 1/(4n^(3/2)), et non 1/(2n).",
+            "Comme uₙ~1/(4n^(3/2)), on a √uₙ~1/(2n^(3/4)). La série correspondante diverge, son exposant de Riemann étant 3/4≤1."
+          ],
+          "source": "Création originale du 10 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Développement limité et équivalent de séries",
+          "difficulty": 3
+        }
+      ]
     }
   ]
 }
