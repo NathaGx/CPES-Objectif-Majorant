@@ -258,6 +258,92 @@
           "difficulty": 3
         }
       ]
+    },
+    {
+      "date": "2026-10-11",
+      "subject": "Algèbre",
+      "items": [
+        {
+          "id": "gei-2026-10-11-0",
+          "subject": "Algèbre",
+          "q": "Soit E un espace vectoriel réel de dimension finie et s∈L(E) tel que s²=Id_E. On pose E₊=Ker(s−Id_E) et E₋=Ker(s+Id_E). Quelles assertions sont vraies ?",
+          "choices": [
+            "s est bijective.",
+            "E₊ ∩ E₋ = {0}.",
+            "E = E₊ ⊕ E₋.",
+            "s est nécessairement un projecteur.",
+            "Ker(s)=E₋."
+          ],
+          "correct": [
+            0,
+            1,
+            2
+          ],
+          "explain": [
+            "La relation s²=Id_E montre que s∘s=Id_E : s est son propre inverse, donc elle est bijective.",
+            "Si x∈E₊∩E₋, alors s(x)=x et s(x)=−x. Ainsi 2x=0 ; sur ℝ, on obtient x=0.",
+            "Pour x∈E, on écrit x=(x+s(x))/2+(x−s(x))/2. Le premier terme appartient à E₊ et le second à E₋ ; la somme est directe d’après l’assertion précédente.",
+            "Un projecteur vérifie p²=p. Ici s²=Id_E n’impose pas s=Id_E ; par exemple s=−Id_E vérifie s²=Id_E mais n’est pas un projecteur.",
+            "Puisque s est bijective, Ker(s)={0}. En revanche E₋ peut être non nul, par exemple pour s=−Id_E."
+          ],
+          "source": "Création originale du 11 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Involutions et décomposition en somme directe",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-11-1",
+          "subject": "Algèbre",
+          "q": "Soit E un espace vectoriel réel de dimension n≥2 et soient φ,ψ∈L(E,ℝ) deux formes linéaires non nulles et non proportionnelles. Quelles assertions sont vraies ?",
+          "choices": [
+            "Ker(φ) et Ker(ψ) sont deux hyperplans de E.",
+            "Ker(φ)+Ker(ψ)=E.",
+            "dim(Ker(φ)∩Ker(ψ))=n−2.",
+            "Ker(φ+ψ)=Ker(φ)∩Ker(ψ).",
+            "Il existe x∈E tel que φ(x)=ψ(x)=1."
+          ],
+          "correct": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "explain": [
+            "Une forme linéaire non nulle a pour image ℝ, donc elle est de rang 1. Le théorème du rang donne dim Ker(φ)=dim Ker(ψ)=n−1.",
+            "Deux hyperplans distincts ne peuvent pas avoir pour somme un hyperplan : comme les noyaux sont distincts, leur somme contient strictement Ker(φ) et vaut donc E.",
+            "Par Grassmann, dim(Ker(φ)∩Ker(ψ))=2(n−1)−dim(Ker(φ)+Ker(ψ))=2n−2−n=n−2.",
+            "L’inclusion Ker(φ)∩Ker(ψ)⊂Ker(φ+ψ) est vraie, mais l’égalité est fausse. L’application x↦(φ(x),ψ(x)) est surjective ; il existe donc x avec (φ(x),ψ(x))=(1,−1), qui appartient à Ker(φ+ψ) sans appartenir à l’intersection.",
+            "L’application T:E→ℝ², x↦(φ(x),ψ(x)), est de rang 2 : sinon ses deux coordonnées seraient liées par une relation non triviale, ce qui rendrait φ et ψ proportionnelles. Elle est donc surjective et (1,1) admet un antécédent."
+          ],
+          "source": "Création originale du 11 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Formes linéaires, hyperplans et Grassmann",
+          "difficulty": 3
+        },
+        {
+          "id": "gei-2026-10-11-2",
+          "subject": "Algèbre",
+          "q": "Soient E et F deux espaces vectoriels réels de dimensions respectives 6 et 5. Soit f:E→F une application linéaire de rang 4 et W un sous-espace de F de dimension 3 tel que dim(W∩Im(f))=2. Une seule réponse est correcte. Laquelle ?",
+          "choices": [
+            "dim Ker(f)=1.",
+            "dim f⁻¹(W)=4.",
+            "W⊂Im(f).",
+            "f est surjective.",
+            "Ker(f) et f⁻¹(W) sont supplémentaires dans E."
+          ],
+          "correct": [
+            1
+          ],
+          "explain": [
+            "Le théorème du rang donne dim Ker(f)=dim E−rang(f)=6−4=2.",
+            "La restriction de f à f⁻¹(W) a pour noyau Ker(f) et pour image W∩Im(f). Le théorème du rang donne donc dim f⁻¹(W)=2+2=4.",
+            "Si W était inclus dans Im(f), on aurait W∩Im(f)=W, donc une intersection de dimension 3, et non 2.",
+            "Une application de E vers F est surjective si son rang vaut dim F=5. Ici son rang vaut 4.",
+            "On a toujours Ker(f)⊂f⁻¹(W) puisque 0∈W. Leur intersection vaut donc Ker(f), de dimension 2, et la somme ne peut pas être directe."
+          ],
+          "source": "Création originale du 11 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Théorème du rang et image réciproque d’un sous-espace",
+          "difficulty": 3
+        }
+      ]
     }
   ]
 }
