@@ -344,6 +344,90 @@
           "difficulty": 3
         }
       ]
+    },
+    {
+      "date": "2026-10-12",
+      "subject": "Analyse",
+      "items": [
+        {
+          "id": "gei-2026-10-12-0",
+          "subject": "Analyse",
+          "q": "Pour α,β∈ℝ, on considère I(α,β)=∫₀^∞ dx/[x^α(1+x)^β]. Quelles assertions sont vraies ?",
+          "choices": [
+            "I(α,β) converge si et seulement si α<1 et α+β>1.",
+            "Si α≥1, I(α,β) diverge à cause de la borne 0.",
+            "Si α+β≤1, I(α,β) diverge à cause de la borne +∞.",
+            "I(1/2,1/2) converge.",
+            "I(2,0) converge."
+          ],
+          "correct": [
+            0,
+            1,
+            2
+          ],
+          "explain": [
+            "Au voisinage de 0, l’intégrande est équivalent à x^(−α), donc l’intégrale converge exactement si α<1. Au voisinage de +∞, elle est équivalente à x^(−α−β), donc elle converge exactement si α+β>1. Les deux conditions sont nécessaires et suffisantes.",
+            "Au voisinage de 0, (1+x)^β tend vers 1 et l’intégrande est équivalent à x^(−α). L’intégrale de Riemann sur ]0,1] diverge lorsque α≥1.",
+            "Au voisinage de +∞, (1+x)^β est équivalent à x^β, donc l’intégrande est équivalent à x^(−α−β). L’intégrale sur [1,+∞[ diverge lorsque α+β≤1.",
+            "Ici α+β=1. À l’infini, l’intégrande est équivalent à 1/x ; l’intégrale diverge donc.",
+            "I(2,0)=∫₀^∞x^(−2)dx. Cette intégrale diverge au voisinage de 0, même si elle converge à l’infini."
+          ],
+          "source": "Création originale du 12 octobre 2026 ; notions vérifiées dans le cours « Chap3-Intégration (1) », sections Intégrales généralisées et Critère d’équivalence, pages 14 à 20. Aucune question du polycopié, des DS ou d’une annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Intégrales généralisées et étude séparée des bornes",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-12-1",
+          "subject": "Analyse",
+          "q": "Pour n≥1, on pose uₙ=n!/nⁿ. Quelles assertions sont vraies ?",
+          "choices": [
+            "La limite de uₙ₊₁/uₙ vaut 1.",
+            "On a uₙ₊₁/uₙ=(n/(n+1))ⁿ et cette quantité tend vers e^(−1).",
+            "La série Σuₙ converge.",
+            "Le critère de d’Alembert ne permet pas de conclure.",
+            "uₙ est équivalent à 1/n."
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "explain": [
+            "Le quotient vaut (n/(n+1))ⁿ=(1+1/n)^(−n), dont la limite est e^(−1), et non 1.",
+            "Un calcul direct donne uₙ₊₁/uₙ=[(n+1)!/(n+1)^(n+1)]·[nⁿ/n!]=(n/(n+1))ⁿ, puis la limite classique (1+1/n)ⁿ→e donne e^(−1).",
+            "Les termes sont positifs et la limite du quotient vaut e^(−1)<1. Le critère de d’Alembert assure donc la convergence.",
+            "Le critère de d’Alembert est ici concluant puisque la limite du quotient est strictement inférieure à 1.",
+            "Comme le quotient uₙ₊₁/uₙ tend vers e^(−1)<1, uₙ décroît finalement au moins géométriquement ; ainsi nuₙ→0. Or uₙ/(1/n)=nuₙ, donc uₙ n’est pas équivalent à 1/n."
+          ],
+          "source": "Création originale du 12 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Critère de d’Alembert",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-12-2",
+          "subject": "Analyse",
+          "q": "Pour n≥1, on pose uₙ=(1+1/n)ⁿ/e−1+1/(2n). Une seule réponse est correcte. Laquelle ?",
+          "choices": [
+            "nuₙ tend vers −1/2.",
+            "n²uₙ tend vers 11/24.",
+            "La série Σuₙ diverge.",
+            "uₙ est équivalent à 1/(2n).",
+            "La série Σ√|uₙ| converge."
+          ],
+          "correct": [
+            1
+          ],
+          "explain": [
+            "Le développement obtenu à l’ordre 2 donne uₙ~11/(24n²), donc nuₙ→0.",
+            "On a n·ln(1+1/n)=1−1/(2n)+1/(3n²)+o(n^(−2)). En exponentiant, (1+1/n)ⁿ/e=1−1/(2n)+11/(24n²)+o(n^(−2)), d’où n²uₙ→11/24.",
+            "Comme uₙ~11/(24n²), la série converge absolument par comparaison à la série de Riemann Σ1/n².",
+            "Le terme d’ordre 1/n est exactement compensé dans la définition de uₙ ; le premier terme non nul est 11/(24n²).",
+            "On a √|uₙ|~√(11/24)/n. La série correspondante diverge par comparaison à la série harmonique."
+          ],
+          "source": "Création originale du 12 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Développement limité exponentiel et convergence",
+          "difficulty": 3
+        }
+      ]
     }
   ]
 }
