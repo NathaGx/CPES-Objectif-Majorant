@@ -436,7 +436,7 @@
         {
           "id": "gei-2026-10-13-0",
           "subject": "Algèbre",
-          "q": "Soit A∈Mₚ,ₙ(ℝ) de rang r et q≥1. On définit Φ:Mₙ,ₛ(ℝ)→Mₚ,ₛ(ℝ) par Φ(X)=AX. Quelles assertions sont vraies ?",
+          "q": "Soit A∈M_{p,n}(ℝ) de rang r et q≥1. On définit Φ:M_{n,q}(ℝ)→M_{p,q}(ℝ) par Φ(X)=AX. Quelles assertions sont vraies ?",
           "choices": [
             "Φ est une application linéaire.",
             "X∈Ker(Φ) si et seulement si chaque colonne de X appartient à Ker(A).",
