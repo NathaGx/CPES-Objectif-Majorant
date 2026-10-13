@@ -428,6 +428,92 @@
           "difficulty": 3
         }
       ]
+    },
+    {
+      "date": "2026-10-13",
+      "subject": "Algèbre",
+      "items": [
+        {
+          "id": "gei-2026-10-13-0",
+          "subject": "Algèbre",
+          "q": "Soit A∈Mₚ,ₙ(ℝ) de rang r et q≥1. On définit Φ:Mₙ,ₛ(ℝ)→Mₚ,ₛ(ℝ) par Φ(X)=AX. Quelles assertions sont vraies ?",
+          "choices": [
+            "Φ est une application linéaire.",
+            "X∈Ker(Φ) si et seulement si chaque colonne de X appartient à Ker(A).",
+            "dim Ker(Φ)=q(n−r).",
+            "rang(Φ)=r.",
+            "Φ est injective si et seulement si rang(A)=n."
+          ],
+          "correct": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "explain": [
+            "Pour X,Y et λ, on a Φ(X+λY)=A(X+λY)=AX+λAY=Φ(X)+λΦ(Y).",
+            "Le produit AX s’obtient en appliquant A séparément à chacune des q colonnes de X. Il est nul exactement lorsque toutes ces colonnes appartiennent à Ker(A).",
+            "Le noyau est isomorphe au produit de q copies de Ker(A). Or dim Ker(A)=n−r par le théorème du rang, donc dim Ker(Φ)=q(n−r).",
+            "L’image est l’ensemble des matrices dont chacune des q colonnes appartient à Im(A). Elle a donc pour dimension qr, et non r en général.",
+            "Φ est injective si et seulement si son noyau est nul, donc si et seulement si Ker(A)={0}, ce qui équivaut à rang(A)=n."
+          ],
+          "source": "Création originale du 13 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Applications linéaires sur les espaces de matrices",
+          "difficulty": 3
+        },
+        {
+          "id": "gei-2026-10-13-1",
+          "subject": "Algèbre",
+          "q": "Soient E et F deux espaces vectoriels réels non nuls de dimension finie, u:E→F linéaire et Γᵤ={(x,u(x)) | x∈E} son graphe dans E×F. Quelles assertions sont vraies ?",
+          "choices": [
+            "Γᵤ est un sous-espace vectoriel de E×F.",
+            "dim Γᵤ = rang(u).",
+            "Γᵤ ∩ (E×{0}) = Ker(u)×{0}.",
+            "E×F = Γᵤ ⊕ ({0}×F).",
+            "Si u est surjective, alors Γᵤ=E×F."
+          ],
+          "correct": [
+            0,
+            2,
+            3
+          ],
+          "explain": [
+            "Le vecteur nul appartient au graphe et, pour (x,u(x)),(y,u(y))∈Γᵤ et λ∈ℝ, leur combinaison vaut (x+λy,u(x+λy)), qui appartient encore au graphe.",
+            "L’application x↦(x,u(x)) est un isomorphisme de E sur Γᵤ, car sa première composante est x. Ainsi dim Γᵤ=dim E, indépendamment du rang de u.",
+            "Un élément commun est de la forme (x,u(x))=(y,0). On a alors y=x et u(x)=0 ; l’intersection est donc exactement Ker(u)×{0}.",
+            "Tout (x,y) s’écrit (x,u(x))+(0,y−u(x)). L’intersection de Γᵤ et {0}×F est nulle, car (0,u(0))=(0,0). La somme est donc directe et égale à E×F.",
+            "Même si u est surjective, le graphe ne contient qu’un couple (x,u(x)) pour chaque première composante x. Comme F est non nul, il ne peut pas contenir tous les couples (x,y) de E×F."
+          ],
+          "source": "Création originale du 13 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Graphe d’une application linéaire et supplémentaire",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-13-2",
+          "subject": "Algèbre",
+          "q": "Soit E un espace vectoriel réel de dimension finie et (x₁,…,xₚ) une famille de vecteurs de E. On définit Φ:ℝᵖ→E par Φ(λ₁,…,λₚ)=Σᵢ₌₁ᵖ λᵢxᵢ. Une seule réponse est correcte. Laquelle ?",
+          "choices": [
+            "La famille (x₁,…,xₚ) est libre si et seulement si Φ est surjective.",
+            "La famille (x₁,…,xₚ) est génératrice de E si et seulement si Φ est injective.",
+            "La famille (x₁,…,xₚ) est une base de E si et seulement si Φ est bijective.",
+            "Ker(Φ)={0} si et seulement si la famille est génératrice de E.",
+            "Le rang de Φ vaut toujours p."
+          ],
+          "correct": [
+            2
+          ],
+          "explain": [
+            "La liberté équivaut à l’unicité de la relation linéaire nulle, donc à Ker(Φ)={0}, c’est-à-dire à l’injectivité de Φ, pas à sa surjectivité.",
+            "L’image de Φ est Vect(x₁,…,xₚ). La famille est génératrice si et seulement si Im(Φ)=E, donc si et seulement si Φ est surjective.",
+            "La famille est une base exactement lorsqu’elle est à la fois libre et génératrice, ce qui équivaut à l’injectivité et à la surjectivité de Φ, donc à sa bijectivité.",
+            "Ker(Φ)={0} caractérise la liberté de la famille, non son caractère générateur.",
+            "Le rang de Φ est dim Vect(x₁,…,xₚ), qui peut être strictement inférieur à p lorsque la famille est liée."
+          ],
+          "source": "Création originale du 13 octobre 2026 ; aucune question des DS fournis ni aucune annale officielle n’est reprise. Format à cinq assertions conforme au Règlement GEI-UNIV 2026, p. 6 : https://www.geiuniv.com/wp-content/uploads/2025/11/Reglement-GEI-UNIV-2026.pdf",
+          "notion": "Familles libres, génératrices et application canonique",
+          "difficulty": 2
+        }
+      ]
     }
   ]
 }
