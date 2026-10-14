@@ -514,6 +514,90 @@
           "difficulty": 2
         }
       ]
+    },
+    {
+      "date": "2026-10-14",
+      "subject": "Analyse",
+      "items": [
+        {
+          "id": "gei-2026-10-14-0",
+          "subject": "Analyse",
+          "q": "Pour n≥1, on pose Sₙ=(1/n)Σₖ₌₁ⁿ 1/[1+(k/n)²]. Quelles assertions sont vraies ?",
+          "choices": [
+            "La suite (Sₙ) converge vers π/4.",
+            "Sₙ est la somme de Riemann à gauche de la fonction x↦1/(1+x²) sur [0,1].",
+            "Pour tout n≥1, Sₙ<π/4.",
+            "Pour tout n≥1, Sₙ≤1/2.",
+            "La suite (Sₙ) converge vers 0."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explain": [
+            "La fonction f:x↦1/(1+x²) est continue sur [0,1]. Ainsi Sₙ est une somme de Riemann et tend vers ∫₀¹ dx/(1+x²)=[arctan x]₀¹=π/4.",
+            "Les points utilisés sont k/n pour k=1,…,n : il s’agit de la somme à droite, et non de la somme à gauche.",
+            "La fonction f est strictement décroissante sur [0,1]. Sur chaque intervalle [(k−1)/n,k/n], on a f(x)>f(k/n) sauf à l’extrémité droite ; après intégration et sommation, ∫₀¹f(x)dx>Sₙ.",
+            "Chaque terme vérifie 1/[1+(k/n)²]≥1/2, et tous sauf le dernier sont strictement supérieurs à 1/2 ; donc Sₙ>1/2.",
+            "La limite vaut π/4, qui est non nulle."
+          ],
+          "source": "Création originale du 14 octobre 2026 ; aucune question des DS fournis, du polycopié d’intégration ni d’une annale officielle n’est reprise.",
+          "notion": "Sommes de Riemann et intégration sur un segment",
+          "difficulty": 2
+        },
+        {
+          "id": "gei-2026-10-14-1",
+          "subject": "Analyse",
+          "q": "Soient f et g deux fonctions de L²(0,1). Quelles assertions sont nécessairement vraies ?",
+          "choices": [
+            "Le produit fg appartient à L¹(0,1).",
+            "Le produit fg appartient à L²(0,1).",
+            "La fonction f+g appartient à L²(0,1).",
+            "La fonction f appartient à L¹(0,1).",
+            "Si (fₙ) est une suite de fonctions de L²(0,1) telle que fₙ(x)→0 pour tout x∈(0,1), alors ∫₀¹fₙ(x)dx→0."
+          ],
+          "correct": [
+            0,
+            2,
+            3
+          ],
+          "explain": [
+            "L’inégalité de Cauchy-Schwarz donne ∫₀¹|fg|≤(∫₀¹|f|²)^{1/2}(∫₀¹|g|²)^{1/2}<∞ ; ainsi fg∈L¹(0,1).",
+            "Ce n’est pas nécessaire. Avec f(x)=g(x)=x^(−1/4), on a f,g∈L²(0,1), car ∫₀¹x^(−1/2)dx<∞, mais fg=x^(−1/2) n’est pas dans L² puisque ∫₀¹x^(−1)dx diverge.",
+            "L’espace L²(0,1) est stable par addition ; par exemple |f+g|²≤2|f|²+2|g|², dont l’intégrale est finie.",
+            "Cauchy-Schwarz appliquée à f et à la fonction constante 1 donne ∫₀¹|f|≤||f||₂||1||₂=||f||₂<∞.",
+            "La convergence simple ne suffit pas. Pour fₙ(x)=n·1_(0,1/n)(x), chaque fₙ appartient à L²(0,1) et fₙ(x)→0 pour tout x∈(0,1), mais ∫₀¹fₙ=1 pour tout n. Il manque notamment une domination intégrable indépendante de n."
+          ],
+          "source": "Création originale du 14 octobre 2026 ; aucune question des DS fournis, du polycopié d’intégration ni d’une annale officielle n’est reprise.",
+          "notion": "Espaces L¹ et L², Cauchy-Schwarz et convergence dominée",
+          "difficulty": 3
+        },
+        {
+          "id": "gei-2026-10-14-2",
+          "subject": "Analyse",
+          "q": "Pour n≥1, on pose aₙ=∫₀¹ xⁿ/(1+x²) dx. Une seule réponse est correcte. Laquelle ?",
+          "choices": [
+            "La suite (naₙ) converge vers 1/2.",
+            "La série Σaₙ converge.",
+            "La série Σ(−1)ⁿaₙ converge absolument.",
+            "On a aₙ∼1/n.",
+            "La suite (n²aₙ) converge vers 1/2."
+          ],
+          "correct": [
+            0
+          ],
+          "explain": [
+            "Pour h(x)=1/(1+x²), continue en 1, le lemme de concentration en l’extrémité donne (n+1)∫₀¹xⁿh(x)dx→h(1)=1/2 ; comme n/(n+1)→1, on obtient naₙ→1/2.",
+            "Puisque aₙ∼1/(2n), la série positive Σaₙ diverge par comparaison avec la série harmonique.",
+            "La série des valeurs absolues est Σaₙ, qui diverge. En revanche, aₙ décroît vers 0, donc la série alternée converge seulement conditionnellement.",
+            "La limite naₙ=1/2 montre que aₙ∼1/(2n), et non 1/n.",
+            "Comme aₙ∼1/(2n), on a n²aₙ∼n/2→+∞."
+          ],
+          "source": "Création originale du 14 octobre 2026 ; aucune question des DS fournis, du polycopié d’intégration ni d’une annale officielle n’est reprise.",
+          "notion": "Intégrales à paramètre et comportement d’une série",
+          "difficulty": 3
+        }
+      ]
     }
   ]
 }
